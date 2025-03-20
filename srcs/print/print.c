@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data.c                                             :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/14 09:37:05 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/20 10:54:01 by kearmand         ###   ########.fr       */
+/*   Created: 2025/03/20 11:22:51 by kearmand          #+#    #+#             */
+/*   Updated: 2025/03/20 16:37:10 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void init_data(t_data *data)
+void	printer(t_data *data)
 {
-	data->nb_philo = 0;
-	data->philo_id = 0;
-	data->time_to_die = 0;
-	data->time_to_eat = 0;
-	data->time_to_sleep = 0;
-	data->nb_eat = 0;
-	data->sim_is_running = -1;
-	data->fork_drawer = NULL;
-	data->flag = 0;
+	long	*lst_instr;
+	long	min;
+	char	str[100];
+
+	//init lst_instr
+	while (1)
+	{
+		print_update(lst_instr, data);
+		min = check_min(lst_instr, data);
+		if (min == -1)
+			sleep(10);
+		else
+		{
+			gen_str(str, min);
+			if(!sim_is_running(data))
+				break ;
+			write(1, str, ft_strlen(str));
+			lst_instr[(min & M_ID) >> 40] = -1;//atention au mutex
+		}
+	}
+	//faire des trucs (sim is no running)
 }

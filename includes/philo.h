@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:07:15 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/20 10:46:27 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/20 10:56:49 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_data
 	int				sim_is_running;
 	int				flag;
 
+	t_msg_fifo		*tab_queue;
 	pthread_mutex_t	*fork_drawer;
 	pthread_mutex_t	talking_stick;
 	pthread_mutex_t	dead;
