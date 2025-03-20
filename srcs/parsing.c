@@ -6,19 +6,17 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:18:12 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/13 13:51:59 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/19 09:34:31 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	custom_atoi(char *str, int *number)
+static int	custom_atoi(char *str, long *number)
 {
 	long	n;
-	int		sign;
 	int		i;
 
-	sign = 1;
 	i = 0;
 	if (*str == '-')
 		return (1);
@@ -30,10 +28,9 @@ static int	custom_atoi(char *str, int *number)
 		n = 10 * n + (str[i] - '0');
 		i++;
 	}
-	if (str[i] != 0 || i == 0 || (n > 2147483648 && sign == -1)
-		|| (n > 2147483647 && sign == 1))
+	if (str[i] != 0 || i == 0 || (n > 2147483647))
 		return (1);
-	*number = (int)(n * sign);
+	*number = n;
 	return (0);
 }
 
@@ -42,6 +39,13 @@ int		parsing(t_data *data, int ac, char **av)
 {
 	if (ac != 5 && ac != 6)
 		return (error_msg(WRONG_NB_ARG));
+	if (!ft_strcmp(av[1], "-c")) //On ajoute un flag
+	{
+		data->flag = 1;
+		printf("flag = %d\n", data->flag);
+		av++;
+		ac--;
+	}
 	if (custom_atoi(av[1], &data->nb_philo)
 		|| custom_atoi(av[2], &data->time_to_die)
 		|| custom_atoi(av[3], &data->time_to_eat)

@@ -10,7 +10,7 @@ BONUS		:=	philo_bonus
 # **************************************************************************** #
 
 CC			:=	cc
-CFLAGS		:=	-g3 -Wall -Wextra
+CFLAGS		:=	-O3 -Wall -Wextra
 DEP_FLAGS	:=	-MMD -MP
 RM			:=	rm -rf
 
@@ -61,6 +61,11 @@ SRC			=	data.c\
 				fork_init.c\
 				philo_arrival.c\
 				philo_thread/philo_init.c\
+				philo_thread/philo_eat.c\
+				philo_thread/philo_sleep.c\
+				philo_thread/philo_think.c\
+				philo_thread/philo_die.c\
+				philo_thread/philo_delay.c\
 
 
 

@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 09:38:17 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/13 09:55:39 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/18 16:45:51 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,17 @@ static void	complete_with_space(char *str, int nb)
 	}
 }
 
+int ft_strcmp(char *s1, char *s2)
+{
+	int i;
+
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
+}
+
+
 void	ft_custom_itoa(int n, char *str)
 {
 	int i;
@@ -84,12 +95,11 @@ void	ft_custom_itoa(int n, char *str)
 		i++;
 	}
 	i--;
-	if (i < 3)
-		complete_with_space(str, 3 - i);
 	while (i >= 0)
 	{
 		*str = tmp[i];
 		str++;
 		i--;
 	}
+	*str = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 09:50:07 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/14 10:07:07 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/17 12:47:39 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	philosophers_arrival(t_data *data, pthread_t **thread)
 	}
 	return (0);
 }
-
 
 void philo_leave(t_data *data, pthread_t *thread, int nb)
 {

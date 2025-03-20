@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:42:15 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/14 09:35:22 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/17 09:35:36 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ enum e_error
 	WRONG_ARG,
 	MALLOC_FAIL,
 	MUTEX_FAIL
-	
 };
 
 #endif

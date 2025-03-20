@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 09:37:05 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/14 11:02:57 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/18 16:50:27 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,5 @@ void init_data(t_data *data)
 	data->nb_eat = 0;
 	data->sim_is_running = 1;
 	data->fork_drawer = NULL;
+	data->flag = 0;
 }

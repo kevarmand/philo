@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:07:15 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/14 14:00:46 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/20 10:46:27 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,19 @@
 
 # include "color.h"
 # include "error.h"
+# include "print.h"
 
 typedef struct s_data
 {
 	int				nb_philo;
 	int				philo_id;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				nb_eat;
+	long			time_to_die;
+	long			time_to_eat;
+	long			time_to_sleep;
+	long			nb_eat;
 	int				sim_is_running;
-	
+	int				flag;
+
 	pthread_mutex_t	*fork_drawer;
 	pthread_mutex_t	talking_stick;
 	pthread_mutex_t	dead;
@@ -62,11 +64,11 @@ typedef struct s_philo
 	t_data			*data;
 	int				id;
 	int				nb_eat;
-	int				time_last_meat;
+	struct timeval	time_last_meat;
 	enum e_action	next_action;
-	pthread_t		thread;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
+	char			str[100];
 }	t_philo;
 
 /***
@@ -78,6 +80,7 @@ int		error_msg(enum e_error err);
  * Function: parsing
  */
 int		parsing(t_data *data, int ac, char **av);
+void 	init_data(t_data *data);
 
 /***
  * Function: printf_msg
@@ -89,14 +92,22 @@ void	print_msg(enum e_state state, int id, int time);
  */
 int		ft_strlen(char *str);
 void	ft_strcpy(char *dst, char *src);
+void	ft_strcat(char *dst, char *src);
+int		ft_strcmp(char *s1, char *s2);
 void	ft_custom_itoa(int n, char *str);
 
 /***
  * Function: time
  */
 int		get_runtime(struct timeval *start);
-void	wait_for_start(t_data *data);
+void	wait_for_start(struct timeval *star, t_philo *philo);
 void	print_timer(void);
+void	precise_sleep(struct timeval *start, long time);
+long	get_time_diff(struct timeval *start, struct timeval *end);
+void	time_copy(struct timeval *dst, struct timeval *src);
+long 	time_to_long(struct timeval *time);
+
+
 
 /***
  * Function: philo_thread
@@ -111,4 +122,21 @@ void	philo_presentation(t_data *data);
 int		create_fork(t_data *data);
 void	destroy_fork_drawer(t_data *data, int nb);
 
+/***
+ * Function: detect_starvation
+ */
+int		check_starvation(t_philo *philo);
+int		sim_is_running(t_data *data);
+
+/***
+ * Function: philo_life
+ */
+void	philo_life(t_philo *philo);
+void	annonce_action(t_philo *philo, enum e_state state, struct timeval *now);
+void	next_action(t_philo *philo);
+void	philo_eat(t_philo *philo, struct timeval *now);
+void	philo_sleep(t_philo *philo, struct timeval *now);
+void	philo_think(t_philo *philo, struct timeval *now);
+void	philo_die(t_philo *philo, struct timeval *now);
+                                      
 #endif
