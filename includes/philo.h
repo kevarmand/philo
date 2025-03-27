@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:07:15 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/27 10:14:56 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/27 16:56:25 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	ft_custom_itoa(int n, char *str);
 /***
  * Function: time
  */
-int		get_runtime(struct timeval *start);
+long	get_runtime(struct timeval *start);
 void	wait_for_start(struct timeval *star, t_philo *philo);
 void	print_timer(void);
 void	precise_sleep(struct timeval *start, long time);
@@ -120,11 +120,6 @@ void	philo_presentation(t_data *data);
 int		create_fork(t_data *data);
 void	destroy_fork_drawer(t_data *data, int nb);
 
-/***
- * Function: detect_starvation
- */
-int		check_starvation(t_philo *philo);
-int		sim_is_running(t_data *data);
 
 /***
  * Function: philo_life
@@ -135,6 +130,6 @@ void	next_action(t_philo *philo);
 void	philo_eat(t_philo *philo, struct timeval *now);
 void	philo_sleep(t_philo *philo, struct timeval *now);
 void	philo_think(t_philo *philo, struct timeval *now);
-void	philo_die(t_philo *philo, struct timeval *now);
+
                                       
 #endif

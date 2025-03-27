@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:10:52 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/27 12:04:16 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/27 16:58:19 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ void	print_advanced(t_philo *philo, enum e_state state, int time)
 		add_color(-1, str);
 	ft_strcat(str, "\n");
 	pthread_mutex_lock(&philo->data->talking_stick);
-	if (sim_is_running(philo->data))
+	if (is_sim_running(philo->data))
 		write(1, str, ft_strlen(str));
 	pthread_mutex_unlock(&philo->data->talking_stick);
 }

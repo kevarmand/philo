@@ -6,13 +6,13 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 10:46:05 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/27 11:46:03 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/27 16:43:40 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	print_init (t_msg_fifo **tab_msg, int nb_philo)
+int	print_init(t_msg_fifo **tab_msg, int nb_philo)
 {
 	int	i;
 
@@ -24,6 +24,7 @@ int	print_init (t_msg_fifo **tab_msg, int nb_philo)
 	{
 		(*tab_msg)[i].current_idx = 0;
 		(*tab_msg)[i].last_idx = 0;
+		(*tab_msg)[i].sim_is_running = 1;
 		if (pthread_mutex_init(&(*tab_msg)[i].mutex, NULL))
 		{
 			print_destroy(*tab_msg, i);

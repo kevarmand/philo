@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 13:54:25 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/19 13:08:55 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/27 16:46:41 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
  * 
  */
 
-int	get_runtime(struct timeval *start)
+long	get_runtime(struct timeval *start)
 {
 	struct timeval	now;
-	int				time;
+	long				time;
 
 	gettimeofday(&now, NULL);
 	time = (now.tv_sec - start->tv_sec) * 1000000;

@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:56:47 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/27 13:00:03 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:00:45 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,13 @@ void	philo_life(t_philo *philo)
 	while (1)
 	{
 		gettimeofday(&time, NULL);
-		if (check_starvation(philo))
-			return ;
-		if (!sim_is_running(philo->data))
-			return ;
+		if (!is_sim_running(philo->data, philo->id))
+			break ;
+		if (philo->data->nb_eat != -1 && philo->nb_eat >= philo->data->nb_eat)
+			break ;
 		action[philo->next_action](philo, &time);
 		next_action(philo);
+
 	}
+	printf("end_philo %d\n", philo->id);
 }

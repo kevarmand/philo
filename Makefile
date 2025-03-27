@@ -71,6 +71,7 @@ SRC			=	data.c\
 				print/print_init.c\
 				print/print_update.c\
 				print/print_add.c\
+				print/check_starvation.c\
 
 
 

@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 10:09:38 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/27 13:08:32 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/27 16:57:31 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_msg_fifo
 	int				current_idx;//index de la liste
 	int				last_idx; 	//dernier index de la liste
 	pthread_mutex_t	mutex;		//mutex pour la liste
-	int				dead;		//flag de mort ()
+	int				sim_is_running;		//flag de mort ()
 }	t_msg_fifo;
 
 void	gen_str(char *str, long instr, int flag);
@@ -66,5 +66,11 @@ int		print_init (t_msg_fifo **tab_msg, int nb_philo);
  void	add_action(enum e_state state, char *str);
  void	add_time(int time, char *str);
  void	add_emoji(enum e_state state, char *str);
+
+/***
+ * print advanced
+ */
+int		check_starvation(long *lst_last_meal, t_data *data);
+void	end_simulation(t_data *data);
 
 #endif

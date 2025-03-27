@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 10:08:38 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/20 09:01:21 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/27 16:56:43 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	philo_sleep(t_philo *philo, struct timeval *now)
 		real_time_to_sleep = philo->data->time_to_die - diff;
 		precise_sleep(now, real_time_to_sleep);
 		gettimeofday(now, NULL);
-		philo_die(philo, now);
 	}
 	else
 	{
