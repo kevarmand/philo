@@ -6,13 +6,13 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:10:52 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/20 09:14:36 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/27 12:04:16 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void print_time(int time)
+void print_time(int time)
 {
 	int	b_time;
 	int	l_time;
@@ -30,7 +30,7 @@ static void print_time(int time)
 	printf("(%03d) ", u_time);
 }
 
-static void	add_time(int time, char *str)
+void	add_time(int time, char *str)
 {
 	int	b_time;
 	int	l_time;
@@ -43,13 +43,13 @@ static void	add_time(int time, char *str)
 	ft_strcat(str, ") ");
 }
 
-static void	add_id(int id, char *str)
+void	add_id(int id, char *str)
 {
 	ft_custom_itoa(id, str + ft_strlen(str));
 	ft_strcat(str, " ");
 }
 
-static void	add_action(enum e_state state, char *str)
+void	add_action(enum e_state state, char *str)
 {
 	if (state == THINKING)
 		ft_strcpy(str + ft_strlen(str), "is thinking     ");
@@ -65,28 +65,11 @@ static void	add_action(enum e_state state, char *str)
 		ft_strcpy(str + ft_strlen(str), "end");
 }
 
-static void	print_id(int id)
+void	print_id(int id)
 {
 	printf("%3d ", id);
 }
 
-static void print_action(enum e_state state)
-{
-	if (state == THINKING)
-		printf("is thinking\n");
-	else if (state == EATING)
-		printf("is eating\n");
-	else if (state == SLEEPING)
-		printf("is sleeping\n");
-	else if (state == DIED)
-		printf("died\n");
-	else if (state == FORK)
-		printf("has taken a fork\n");
-	else if (state == END)
-		printf("end\n");
-	else if (state == TEST)
-		printf("Created\n");
-}
 
 void	print_msg(enum e_state state, int id, int time)
 {
@@ -100,7 +83,7 @@ void	print_msg(enum e_state state, int id, int time)
 	
 	print_time(time);
 	print_id(id);
-	print_action(state);
+	//print_action(state);
 }
 
 void	add_color(int id, char *str)
@@ -175,5 +158,5 @@ void	annonce_action(t_philo *philo, enum e_state state, struct timeval *now)
 	long time;
 
 	time = get_time_diff(&philo->data->start, now);
-	print_advanced(philo, state, time);
+	gen_msg(philo, state, time);
 }

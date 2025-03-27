@@ -66,7 +66,7 @@ SRC			=	data.c\
 				philo_thread/philo_think.c\
 				philo_thread/philo_die.c\
 				philo_thread/philo_delay.c\
-				print/gen_instructions.c\
+				print/gen_instruction.c\
 				print/print.c\
 				print/print_init.c\
 				print/print_update.c\

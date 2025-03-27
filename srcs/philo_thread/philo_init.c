@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:56:47 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/20 10:08:11 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/27 13:00:03 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,6 @@ void	philo_presentation(t_data *data)
 	philo.next_action = EAT;
 	
 	//wait le debut de la simulation
-	pthread_mutex_lock(&data->talking_stick);
-	pthread_mutex_unlock(&data->talking_stick);
-
 	wait_for_start(&data->start, &philo);
 	philo_life(&philo);
 }
@@ -73,7 +70,9 @@ void	philo_life(t_philo *philo)
 	while (1)
 	{
 		gettimeofday(&time, NULL);
-		if (check_starvation(philo) || !sim_is_running(philo->data))
+		if (check_starvation(philo))
+			return ;
+		if (!sim_is_running(philo->data))
 			return ;
 		action[philo->next_action](philo, &time);
 		next_action(philo);

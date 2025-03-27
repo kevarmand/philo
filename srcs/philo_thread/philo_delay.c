@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 15:58:16 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/20 09:02:57 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/27 11:45:09 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,4 @@ void	wait_for_start(struct timeval *start, t_philo *philo)
 	else if ((philo->id % 2))
 		time += philo->data->time_to_eat;
 	precise_sleep(&now, time);
-	//gettimeofday(&now, NULL);
-	//annonce_action(philo, TEST, &now);
 }

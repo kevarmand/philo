@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 09:38:17 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/18 16:45:51 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/26 13:27:58 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	ft_strlen(char *str)
 		i++;
 	return (i);
 }
+
 void	ft_strcpy(char *dst, char *src)
 {
 	int i;

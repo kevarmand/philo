@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:18:12 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/19 09:34:31 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/27 10:40:31 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,24 @@ static int	custom_atoi(char *str, long *number)
 }
 
 
+static int	check_value(t_data *data)
+{
+	if (data->nb_philo < 1 || data->time_to_die < 60 || data->time_to_eat < 60
+		|| data->time_to_sleep < 60 || (data->nb_eat != -1 && data->nb_eat < 1))
+		return (1);
+	return (0);
+}
+
 int		parsing(t_data *data, int ac, char **av)
 {
-	if (ac != 5 && ac != 6)
-		return (error_msg(WRONG_NB_ARG));
-	if (!ft_strcmp(av[1], "-c")) //On ajoute un flag
+	if (ac > 1 && !ft_strcmp(av[1], "-c"))
 	{
 		data->flag = 1;
-		printf("flag = %d\n", data->flag);
 		av++;
 		ac--;
 	}
+	if (ac != 5 && ac != 6)
+		return (error_msg(WRONG_NB_ARG));
 	if (custom_atoi(av[1], &data->nb_philo)
 		|| custom_atoi(av[2], &data->time_to_die)
 		|| custom_atoi(av[3], &data->time_to_eat)
@@ -58,8 +65,7 @@ int		parsing(t_data *data, int ac, char **av)
 	}
 	else
 		data->nb_eat = -1;
-	if (data->nb_philo < 1 || data->time_to_die < 60 || data->time_to_eat < 60
-		|| data->time_to_sleep < 60 || (ac == 6 && data->nb_eat < 1))
+	if (check_value(data))
 		return (error_msg(WRONG_ARG));
 	return (0);
 }

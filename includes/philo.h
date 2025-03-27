@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:07:15 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/20 10:56:49 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/27 10:14:56 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ enum e_state
 	TEST
 };
 
-
 typedef struct s_philo
 {
 	t_data			*data;
@@ -107,8 +106,6 @@ void	precise_sleep(struct timeval *start, long time);
 long	get_time_diff(struct timeval *start, struct timeval *end);
 void	time_copy(struct timeval *dst, struct timeval *src);
 long 	time_to_long(struct timeval *time);
-
-
 
 /***
  * Function: philo_thread

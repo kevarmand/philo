@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:06:51 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/19 13:12:05 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/27 12:52:05 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int main(int ac, char **av)
 	int			err;
 	t_data		data;
 	pthread_t	*thread;
+	pthread_t	printer_thread;
 
 	init_data(&data);
 
@@ -39,6 +40,14 @@ int main(int ac, char **av)
 	gettimeofday(&data.start, NULL);
 	data.start.tv_sec += 1;
 
+	//Creation du queue de message
+	err = print_init(&data.tab_queue, data.nb_philo);
+	if (err)
+		return (err);
+	//lancement de la fonction printer
+	pthread_create(&printer_thread, NULL, &printer, &data);//pas de protection parce que YOLO
+	printf("start\n");
+	
 	//creation des philo
 	if (!err)
 		err = philosophers_arrival(&data, &thread);
@@ -47,7 +56,6 @@ int main(int ac, char **av)
 
 
 	
-	data.sim_is_running = 1;
 	
 	//unlock the talking stick for the start TOP DEPART
 	pthread_mutex_unlock(&data.talking_stick);
@@ -56,7 +64,8 @@ int main(int ac, char **av)
 	
 	//wait le retour des philo
 	philo_leave(&data, thread, data.nb_philo);
-	
+	printf("end_main\n");
+	pthread_join(printer_thread, NULL);
 	//destroy les fourchette
 	destroy_fork_drawer(&data, data.nb_philo);
 	//destroy les mutex
