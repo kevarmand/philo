@@ -6,13 +6,13 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:09:08 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/27 12:02:33 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/28 10:32:50 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	gen_str(char *str, long instr, int flag)
+void	gen_str(char *str, long instr, int flag, t_data *data)
 {
 	int		id;
 	int		time;
@@ -32,6 +32,9 @@ void	gen_str(char *str, long instr, int flag)
 	add_action(state, str);
 	if (flag)
 		add_color(-1, str);
+	ft_strcat(str, "  <= ");
+	time = get_runtime(&data->start);
+	add_time(time, str);
 	ft_strcat(str, "\n");
 }
 

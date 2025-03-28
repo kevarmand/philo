@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:06:51 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/27 12:52:05 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/28 15:25:30 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int main(int ac, char **av)
 	if (err)
 		return (err);
 	//lancement de la fonction printer
-	pthread_create(&printer_thread, NULL, &printer, &data);//pas de protection parce que YOLO
+	pthread_create(&printer_thread, NULL, printer, &data);//pas de protection parce que YOLO
 	printf("start\n");
 	
 	//creation des philo
@@ -63,8 +63,7 @@ int main(int ac, char **av)
 
 	
 	//wait le retour des philo
-	philo_leave(&data, thread, data.nb_philo);
-	printf("end_main\n");
+	philo_leave(thread, data.nb_philo);
 	pthread_join(printer_thread, NULL);
 	//destroy les fourchette
 	destroy_fork_drawer(&data, data.nb_philo);

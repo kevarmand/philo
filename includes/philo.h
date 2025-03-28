@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:07:15 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/27 16:56:25 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/28 15:25:45 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,22 @@
 # include "error.h"
 # include "print.h"
 
+/***
+ * Structure: t_fork
+ * -------------------
+ * state: -1 = taken
+ * else id of last philo who took it
+ */
+typedef struct s_fork
+{
+	int				state;
+	pthread_mutex_t	mutex;
+}	t_fork;
+
+
 typedef struct s_data
 {
-	int				nb_philo;
+	long			nb_philo;
 	int				philo_id;
 	long			time_to_die;
 	long			time_to_eat;
@@ -35,7 +48,7 @@ typedef struct s_data
 	int				flag;
 
 	t_msg_fifo		*tab_queue;
-	pthread_mutex_t	*fork_drawer;
+	t_fork			*fork_drawer;
 	pthread_mutex_t	talking_stick;
 	pthread_mutex_t	dead;
 	struct timeval	start;
@@ -66,8 +79,8 @@ typedef struct s_philo
 	int				nb_eat;
 	struct timeval	time_last_meat;
 	enum e_action	next_action;
-	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	*right_fork;
+	t_fork			*left_fork;
+	t_fork			*right_fork;
 	char			str[100];
 }	t_philo;
 
@@ -82,10 +95,6 @@ int		error_msg(enum e_error err);
 int		parsing(t_data *data, int ac, char **av);
 void 	init_data(t_data *data);
 
-/***
- * Function: printf_msg
- */
-void	print_msg(enum e_state state, int id, int time);
 
 /***
  * Function: string_utils
@@ -111,8 +120,9 @@ long 	time_to_long(struct timeval *time);
  * Function: philo_thread
  */
 int		philosophers_arrival(t_data *data, pthread_t **thread);
-void	philo_leave(t_data *data, pthread_t *thread, int nb);
-void	philo_presentation(t_data *data);
+void	philo_leave(pthread_t *thread, int nb);
+void	*philo_presentation(void *data);
+int		is_sim_running(t_data *data, int id);
 
 /***
  * Fork function

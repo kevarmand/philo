@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 13:42:35 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/27 13:00:14 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/28 15:51:56 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	print_update(long *lst_instr, t_data *data)
 {
 	int		i;
-	long	min;
 	int		nb_philo;
 
 	nb_philo = data->nb_philo;

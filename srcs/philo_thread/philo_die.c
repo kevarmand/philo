@@ -6,25 +6,11 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 11:09:17 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/27 16:53:56 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/28 14:15:39 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-// int	check_starvation(t_philo *philo)
-// {
-// 	struct timeval	time;
-
-// 	gettimeofday(&time, NULL);
-// 	if (get_time_diff(&philo->time_last_meat, &time) > philo->data->time_to_die)
-// 	{
-// 		philo_die(philo, &time);
-// 		return (1);
-// 	}
-// 	return (0);
-// }
-
 
 int	is_sim_running(t_data *data, int id)
 {

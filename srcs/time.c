@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 13:54:25 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/27 16:46:41 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/28 15:54:53 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	precise_sleep(struct timeval *start, long time)
 		gettimeofday(&now, NULL);
 		elapsed = get_time_diff(start, &now);
 	}
-	while (time - elapsed > 1000)
+	while (time - elapsed > 100)
 	{
 		usleep((int)(time - elapsed)/2);
 		gettimeofday(&now, NULL);

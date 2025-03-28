@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:56:47 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/27 17:00:45 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/28 16:13:07 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@ void	philo_life(t_philo *philo);
  * Attention l id du philo = data->philo_id
  * [ Ce nest pas son nom , le nom est n +1]
  */
-void	philo_presentation(t_data *data)
+void	*philo_presentation(void *data1)
 {
 	t_philo	philo;
+	t_data	*data;
 
+	data = (t_data *)data1;
 	philo.data = data;
 	
 	for (int i = 0; i < 100; i++)
@@ -31,22 +33,14 @@ void	philo_presentation(t_data *data)
 	data->philo_id++;
 	pthread_mutex_unlock(&data->dead);
 	philo.nb_eat = 0;
-	if (philo.id % 2 == 1 && data->nb_philo % 2 == 1)
-	{
-		philo.right_fork = &data->fork_drawer[philo.id];
-		philo.left_fork = &data->fork_drawer[(philo.id + 1) % data->nb_philo];
-	}
-	else
-	{
-		philo.left_fork = &data->fork_drawer[philo.id];
-		philo.right_fork = &data->fork_drawer[(philo.id + 1) % data->nb_philo];
-	}
+	philo.left_fork = &data->fork_drawer[philo.id];
+	philo.right_fork = &data->fork_drawer[(philo.id + 1) % data->nb_philo];
 	time_copy(&philo.time_last_meat, &data->start);
 	philo.next_action = EAT;
-	
 	//wait le debut de la simulation
 	wait_for_start(&data->start, &philo);
 	philo_life(&philo);
+	return (NULL);
 }
 
 
@@ -66,17 +60,16 @@ void	philo_life(t_philo *philo)
 	//tableau de fonction
 	static void	(*action[3])(t_philo *philo, struct timeval *now) = {philo_eat,
 				philo_sleep, philo_think};
-	
+				
 	while (1)
 	{
 		gettimeofday(&time, NULL);
+		
 		if (!is_sim_running(philo->data, philo->id))
 			break ;
 		if (philo->data->nb_eat != -1 && philo->nb_eat >= philo->data->nb_eat)
 			break ;
 		action[philo->next_action](philo, &time);
 		next_action(philo);
-
 	}
-	printf("end_philo %d\n", philo->id);
 }

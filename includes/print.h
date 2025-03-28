@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 10:09:38 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/27 16:57:31 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/28 15:49:35 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ typedef struct s_msg_fifo
 	int				sim_is_running;		//flag de mort ()
 }	t_msg_fifo;
 
-void	gen_str(char *str, long instr, int flag);
+void	gen_str(char *str, long instr, int flag, t_data *data);
 void	gen_msg(t_philo *philo, enum e_state state, long time);
-void	printer(t_data *data);
+void	*printer(void *data);
 void	print_update(long *lst_instr, t_data *data);
 long	check_min(long *lst_instr, t_data *data);
 
@@ -66,6 +66,7 @@ int		print_init (t_msg_fifo **tab_msg, int nb_philo);
  void	add_action(enum e_state state, char *str);
  void	add_time(int time, char *str);
  void	add_emoji(enum e_state state, char *str);
+ void	add_color(int id, char *str);
 
 /***
  * print advanced

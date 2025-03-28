@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:22:51 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/27 17:05:09 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/28 15:51:44 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int print_data_init(long **lst_instr, long **lst_last_meal, t_data *data)
 	return (0);
 }
 
-static void wait_for_begin(struct timeval *start, t_data *data)
+static void wait_for_begin(struct timeval *start)
 {
 	struct timeval	now;
 	long			time;
@@ -47,33 +47,40 @@ void update_eat(long *lst_last_meal, long min)
 		lst_last_meal[id] = (min & M_INST);
 }
 
-void	printer(t_data *data)
+void	*printer(void *data1)
 {
+	t_data	*data;
 	long	*lst_instr;
 	long	*lst_last_meal;
 	long	min;
 	char	str[100];
 
+	data = (t_data *)data1;
 	if (print_data_init(&lst_instr, &lst_last_meal, data))
-		return ;
-	wait_for_begin(&data->start, data);
+		return (NULL);
+	wait_for_begin(&data->start);
 	while (1)
 	{
 		print_update(lst_instr, data);
-		if (check_starvation(lst_last_meal, data))
-			break ;
 		min = check_min(lst_instr, data);
 		if (min == -1)
+		{
+			if (check_starvation(lst_last_meal, data))
+				break ;
 			usleep(100);
+		}
 		else
 		{
-			gen_str(str, min, data->flag);
+			gen_str(str, min, data->flag, data);
 			update_eat(lst_last_meal, min);
 			write(1, str, ft_strlen(str));
 			lst_instr[(min & M_ID) >> 48] = -1;
 		}
 	}
 	end_simulation(data);
+	free(lst_instr);
+	free(lst_last_meal);
+	return (NULL);
 }
 
 

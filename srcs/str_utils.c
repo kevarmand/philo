@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 09:38:17 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/26 13:27:58 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/28 15:23:35 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_strcat(char *dst, char *src)
 	}
 	dst[i] = 0;
 }
-
+/*
 static void	complete_with_space(char *str, int nb)
 {
 	int i;
@@ -64,7 +64,7 @@ static void	complete_with_space(char *str, int nb)
 		str++;
 		i++;
 	}
-}
+}*/
 
 int ft_strcmp(char *s1, char *s2)
 {

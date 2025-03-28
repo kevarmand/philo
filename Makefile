@@ -10,7 +10,7 @@ BONUS		:=	philo_bonus
 # **************************************************************************** #
 
 CC			:=	cc
-CFLAGS		:=	-O3 -Wall -Wextra
+CFLAGS		:=	-O0 -Wall -Wextra -Werror
 DEP_FLAGS	:=	-MMD -MP
 RM			:=	rm -rf
 
