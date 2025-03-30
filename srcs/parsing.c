@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:18:12 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/27 10:40:31 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/30 12:14:27 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,19 @@ static int	check_value(t_data *data)
 	return (0);
 }
 
+static int	flag(t_data *data, int *ac, char ***av)
+{
+	data->flag = 0;
+	if ((*av)[1][0] != '-')
+		return (0);
+	
+	return (1);
+}
+
 int		parsing(t_data *data, int ac, char **av)
 {
-	if (ac > 1 && !ft_strcmp(av[1], "-c"))
-	{
-		data->flag = 1;
-		av++;
-		ac--;
-	}
+	if (ac > 1 && !flag(data, &ac, &av))
+		return (error_msg(WRONG_FLAG));
 	if (ac != 5 && ac != 6)
 		return (error_msg(WRONG_NB_ARG));
 	if (custom_atoi(av[1], &data->nb_philo)

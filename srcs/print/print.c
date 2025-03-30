@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:22:51 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/28 15:51:44 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/30 11:58:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,32 @@ static void wait_for_begin(struct timeval *start)
 
 void update_eat(long *lst_last_meal, long min)
 {
-	int id;
+	long	id;
+	long	action;
 
 	id = (min & M_ID) >> 48;
-	if ((min & M_ACTION) >> 56 == EATING)
+	action = (min & M_ACTION) >> 56;
+	//check si le philo est deja mort mais besoin dune variable en plus
+
+	if (action == EATING)
+	{
 		lst_last_meal[id] = (min & M_INST);
+	}
+	if (action == END)
+		lst_last_meal[id] = -1;
+}
+
+int		all_philo_ate(long *lst_last_meal, long nb_philo)
+{
+	long	i;
+
+	i = -1;
+	while (++i < nb_philo)
+	{
+		if (lst_last_meal[i] != -1)
+			return (0);
+	}
+	return (1);
 }
 
 void	*printer(void *data1)
@@ -67,6 +88,8 @@ void	*printer(void *data1)
 		{
 			if (check_starvation(lst_last_meal, data))
 				break ;
+			if (all_philo_ate(lst_last_meal, data->nb_philo))
+				break ;
 			usleep(100);
 		}
 		else
@@ -82,5 +105,3 @@ void	*printer(void *data1)
 	free(lst_last_meal);
 	return (NULL);
 }
-
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_eat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 10:02:21 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/28 16:12:21 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/30 10:14:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	philo_eat(t_philo *philo, struct timeval *now)
 	take_forks(philo);
 	gettimeofday(now, NULL);
 	annonce_action(philo, EATING, now);
+	philo->time_last_meat = *now;
 	precise_sleep(now, (long)philo->data->time_to_eat);
 	free_forks(philo);
 	philo->nb_eat++;

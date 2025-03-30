@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:42:15 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/17 09:35:36 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/30 12:14:58 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ enum e_error
 	MALLOC_FAIL,
 	MUTEX_FAIL
 };
+
 
 #endif

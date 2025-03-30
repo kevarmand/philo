@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:56:47 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/28 16:13:07 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/30 10:37:58 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	philo_life(t_philo *philo);
 
 /***
  * Attention l id du philo = data->philo_id
- * [ Ce nest pas son nom , le nom est n +1]
+ * [ Ce nest pas son nom , le nom est n + 1]
  */
 void	*philo_presentation(void *data1)
 {
@@ -64,7 +64,6 @@ void	philo_life(t_philo *philo)
 	while (1)
 	{
 		gettimeofday(&time, NULL);
-		
 		if (!is_sim_running(philo->data, philo->id))
 			break ;
 		if (philo->data->nb_eat != -1 && philo->nb_eat >= philo->data->nb_eat)
@@ -72,4 +71,5 @@ void	philo_life(t_philo *philo)
 		action[philo->next_action](philo, &time);
 		next_action(philo);
 	}
+	annonce_action(philo, END, &time);
 }
