@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:06:51 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/28 15:25:30 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/31 13:34:39 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ int main(int ac, char **av)
 	//free les thread
 	free(thread);
 	//return the error
+	printf("\n🎉  🎉  The simulation's over, time to settle the bill!  🎉  🎉\n");
 	return (err);
 }

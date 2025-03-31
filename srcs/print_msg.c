@@ -6,47 +6,64 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:10:52 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/28 15:23:13 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/31 13:24:48 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void print_time(int time)
-{
-	int	b_time;
-	int	l_time;
-	int	u_time;
-	
-	u_time = time % 1000;
-	time = time / 1000;
-	b_time = (time / 1000) % 1000;
-	l_time = time % 1000;
-	if (b_time == 0)
-		printf("   ");
-	else
-		printf("%3d", b_time);
-	printf(" %03d ", l_time);
-	printf("(%03d) ", u_time);
-}
-
 void	add_time(int time, char *str)
 {
-	int	b_time;
-	int	l_time;
+	int	ms_time;
+	int	s_time;
+	int m_time;
 
-	b_time = time / 1000;
-	l_time = time % 1000;
-	ft_custom_itoa(b_time, str + ft_strlen(str));
-	ft_strcat(str, " (");
-	ft_custom_itoa(l_time, str + ft_strlen(str));
-	ft_strcat(str, ") ");
+	ms_time = time / 1000;
+	s_time = ms_time / 1000;
+	m_time = s_time / 60;
+	ms_time = ms_time % 1000;
+	s_time = s_time % 60;
+	if (m_time == 0)
+		ft_strcat(str, "   ");
+	else
+	{
+		ft_custom_itoa(m_time, str + ft_strlen(str));
+		ft_strcat(str, ":");
+	}
+	if (s_time < 10)
+		ft_strcat(str, " ");
+	ft_custom_itoa(s_time, str + ft_strlen(str));
+	ft_strcat(str, ".");
+	if (ms_time < 100)
+		ft_strcat(str, "0");
+	if (ms_time < 10)
+		ft_strcat(str, "0");
+	ft_custom_itoa(ms_time, str + ft_strlen(str));
+	ft_strcat(str, "\t");
+}
+
+void	add_vanilla_time(long time, char *str)
+{
+	int ms_time;
+
+	ms_time = (int)(time / 1000);
+	if (ms_time < 1000)
+		ft_strcat(str, " ");
+	if (ms_time < 10000)
+		ft_strcat(str, " ");
+	ft_custom_itoa(ms_time, str + ft_strlen(str));
+	ft_strcat(str, "\t");
 }
 
 void	add_id(int id, char *str)
 {
 	ft_custom_itoa(id, str + ft_strlen(str));
 	ft_strcat(str, " ");
+		//rajouter des espaces pour toujours avoir 3 caracteres
+	if (id < 10)
+		ft_strcat(str, " ");
+	if (id < 100)
+		ft_strcat(str, " ");
 }
 
 void	add_action(enum e_state state, char *str)
@@ -62,17 +79,13 @@ void	add_action(enum e_state state, char *str)
 	else if (state == FORK)
 		ft_strcpy(str + ft_strlen(str), "has taken a fork");
 	else if (state == END)
-		ft_strcpy(str + ft_strlen(str), "end");
+		ft_strcpy(str + ft_strlen(str), "has had their fill");
 }
-
-void	print_id(int id)
-{
-	printf("%3d ", id);
-}
-
 
 /***
- * Il existe aussi des couleurs dans la palette étendue (256 couleurs). Les codes de couleurs supplémentaires sont définis entre \033[38;5;Xm, où X est le numéro de couleur (de 0 à 255). Voici quelques exemples :
+ * Il existe aussi des couleurs dans la palette étendue (256 couleurs).
+ * Les codes de couleurs supplémentaires sont définis entre \033[38;5;Xm, 
+ * où X est le numéro de couleur (de 0 à 255).
  */
 void	add_color(int id, char *str)
 {
@@ -85,39 +98,12 @@ void	add_color(int id, char *str)
 		ft_strcat(str, "m");
 	}
 }
- 
-void	add_color2(int id, char *str)
-{
-	if (id == 0)
-		ft_strcat(str, CYAN);
-	else if (id == 1)
-		ft_strcat(str, GREEN);
-	else if (id == 2)
-		ft_strcat(str, YELLOW);
-	else if (id == 3)
-		ft_strcat(str, BLUE);
-	else if (id == 4)
-		ft_strcat(str, MAGENTA);
-	else if (id == 5)
-		ft_strcat(str, CYAN);
-	else if (id == 6)
-		ft_strcat(str, GREEN);
-	else if (id == 7)
-		ft_strcat(str, YELLOW);
-	else if (id == 8)
-		ft_strcat(str, BLUE);
-	else if (id == 9)
-		ft_strcat(str, MAGENTA);
-	else
-		ft_strcat(str, RESET);
-}
-
 
 void	add_emoji(enum e_state state, char *str)
 {
 	if (state == THINKING)
 		ft_strcat(str, "🤔 ");
-	else if (state == EATING)
+	else if (state == EATING)	
 		ft_strcat(str, "🍝 ");
 	else if (state == SLEEPING)
 		ft_strcat(str, "😴 ");
@@ -130,30 +116,6 @@ void	add_emoji(enum e_state state, char *str)
 	else if (state == TEST)
 		ft_strcat(str, "🎉 ");
 }
-/**
-void	print_advanced(t_philo *philo, enum e_state state, int time)
-{
-	char *str;
-
-	str = philo->str;
-	str[0] = 0;
-	if (philo->data->flag)
-	{
-		add_emoji(state, str);
-		add_color(philo->id, str);
-	}
-	add_time(time, str);
-	add_id(philo->id, str);
-	add_action(state, str);
-	if (philo->data->flag)
-		add_color(-1, str);
-	ft_strcat(str, "\n");
-	pthread_mutex_lock(&philo->data->talking_stick);
-	if (is_sim_running(philo->data))
-		write(1, str, ft_strlen(str));
-	pthread_mutex_unlock(&philo->data->talking_stick);
-}
-	*/
 
 void	annonce_action(t_philo *philo, enum e_state state, struct timeval *now)
 {

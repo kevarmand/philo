@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:07:15 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/30 10:35:10 by marvin           ###   ########.fr       */
+/*   Updated: 2025/03/31 09:18:55 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 # include "color.h"
 # include "error.h"
-# include "print.h"
+# include "monitoring.h"
 
 /***
  * Structure: t_fork
@@ -104,6 +104,7 @@ void	ft_strcpy(char *dst, char *src);
 void	ft_strcat(char *dst, char *src);
 int		ft_strcmp(char *s1, char *s2);
 void	ft_custom_itoa(int n, char *str);
+int		ft_strchr(char *str, char c);
 
 /***
  * Function: time

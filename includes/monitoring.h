@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.h                                            :+:      :+:    :+:   */
+/*   monitoring.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 10:09:38 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/28 15:49:35 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/31 11:26:18 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,15 @@ typedef struct s_philo t_philo;
 typedef struct s_data t_data;
 enum e_state;
 
+typedef struct s_display
+{
+	char	*str;
+	int		len;
+	int		id_philo;
+	int		time;
+	int		emoji;
+	int		color;
+}	t_display;
 
 
 typedef struct s_msg_fifo
@@ -65,6 +74,7 @@ int		print_init (t_msg_fifo **tab_msg, int nb_philo);
  void	add_id(int id, char *str);
  void	add_action(enum e_state state, char *str);
  void	add_time(int time, char *str);
+ void	add_vanilla_time(long time, char *str);
  void	add_emoji(enum e_state state, char *str);
  void	add_color(int id, char *str);
 

@@ -3,7 +3,6 @@
 # **************************************************************************** #
 
 NAME		:=	philo
-BONUS		:=	philo_bonus
 
 # **************************************************************************** #
 #                                     UTILS                                    #
@@ -66,12 +65,13 @@ SRC			=	data.c\
 				philo_thread/philo_think.c\
 				philo_thread/philo_die.c\
 				philo_thread/philo_delay.c\
-				print/gen_instruction.c\
-				print/print.c\
-				print/print_init.c\
-				print/print_update.c\
-				print/print_add.c\
-				print/check_starvation.c\
+				monitoring/monitoring.c\
+				monitoring/print_init.c\
+				monitoring/print_update.c\
+				monitoring/print_add.c\
+				monitoring/check_starvation.c\
+				monitoring/gen_instruction.c
+
 
 
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   monitoring.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:22:51 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/30 11:58:41 by marvin           ###   ########.fr       */
+/*   Updated: 2025/03/31 11:12:30 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,18 @@ int		all_philo_ate(long *lst_last_meal, long nb_philo)
 	return (1);
 }
 
+void init_str(char *str)
+{
+	int i;
+
+	i = 0;
+	while (i < 100)
+	{
+		str[i] = ' ';
+		i++;
+	}
+}
+
 void	*printer(void *data1)
 {
 	t_data	*data;
@@ -75,8 +87,10 @@ void	*printer(void *data1)
 	long	*lst_last_meal;
 	long	min;
 	char	str[100];
+	
 
 	data = (t_data *)data1;
+	init_str(str);
 	if (print_data_init(&lst_instr, &lst_last_meal, data))
 		return (NULL);
 	wait_for_begin(&data->start);

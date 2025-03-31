@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:18:12 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/30 12:14:27 by marvin           ###   ########.fr       */
+/*   Updated: 2025/03/31 10:17:51 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,35 @@ static int	check_value(t_data *data)
 	if (data->nb_philo < 1 || data->time_to_die < 60 || data->time_to_eat < 60
 		|| data->time_to_sleep < 60 || (data->nb_eat != -1 && data->nb_eat < 1))
 		return (1);
+	if (data->time_to_die < data->time_to_eat)
+	{
+		printf("Un peu de bon sens, un philosophe ne peut pas mourir avant d'avoir mangé\n");
+		return (1);
+	}
 	return (0);
 }
 
 static int	flag(t_data *data, int *ac, char ***av)
 {
 	data->flag = 0;
-	if ((*av)[1][0] != '-')
+	if ((*av)[1][0] != '-' || (*av)[1][1] != '-')
 		return (0);
-	
-	return (1);
+	if (ft_strchr((*av)[1], 'c'))
+		data->flag += 1;
+	if (ft_strchr((*av)[1], 't'))
+		data->flag += 2;
+	if (ft_strchr((*av)[1], 'a'))
+		data->flag = 3;
+	if (data->flag == 0)
+		return (1);
+	(*ac)--;
+	(*av)++;
+	return (0);
 }
 
 int		parsing(t_data *data, int ac, char **av)
 {
-	if (ac > 1 && !flag(data, &ac, &av))
+	if (ac > 1 && flag(data, &ac, &av))
 		return (error_msg(WRONG_FLAG));
 	if (ac != 5 && ac != 6)
 		return (error_msg(WRONG_NB_ARG));
