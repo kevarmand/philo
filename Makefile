@@ -50,23 +50,23 @@ INCLUDES	:=	$(strip $(INC))
 INCLD_FLAG	:=	$(addprefix -I , $(INCLUDES))
 
 # SOURCES #
-SRC			=	data.c\
+SRC			=	data/data.c\
+				data/fork.c\
+				data/queue.c\
+				data/sim_is_running.c\
 				main.c\
 				parsing.c\
 				error_msg.c\
 				print_msg.c\
 				str_utils.c\
 				time.c\
-				fork_init.c\
 				philo_arrival.c\
 				philo_thread/philo_init.c\
 				philo_thread/philo_eat.c\
 				philo_thread/philo_sleep.c\
 				philo_thread/philo_think.c\
-				philo_thread/philo_die.c\
 				philo_thread/philo_delay.c\
 				monitoring/monitoring.c\
-				monitoring/print_init.c\
 				monitoring/print_update.c\
 				monitoring/print_add.c\
 				monitoring/check_starvation.c\

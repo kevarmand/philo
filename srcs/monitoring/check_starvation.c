@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:03:06 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/31 13:34:59 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:40:34 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_starvation(long *lst_last_meal, t_data *data)
 	long	diff;
 
 	i = 0;
-	now = get_runtime(&data->start);
+	now = get_runtime(data->start);
 	while (i < data->nb_philo)
 	{
 		if (lst_last_meal[i] != -1)
@@ -46,12 +46,9 @@ void	end_simulation(t_data *data)
 	i = 0;
 	while (i < data->nb_philo)
 	{
-		pthread_mutex_lock(&data->tab_queue[i].mutex);
-		data->tab_queue[i].sim_is_running = 0;
-		pthread_mutex_unlock(&data->tab_queue[i].mutex);
+		pthread_mutex_lock(&data->shared.tab_msg[i].mutex);
+		data->shared.tab_msg[i].buffer[data->shared.tab_msg[i].current_idx] = -1;
+		pthread_mutex_unlock(&data->shared.tab_msg[i].mutex);
 		i++;
 	}
-	pthread_mutex_lock(&data->dead);
-	data->sim_is_running = 0;
-	pthread_mutex_unlock(&data->dead);
 }

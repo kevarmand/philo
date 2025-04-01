@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:10:52 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/31 13:24:48 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/31 15:04:45 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,10 @@ void	add_emoji(enum e_state state, char *str)
 		ft_strcat(str, "🎉 ");
 }
 
-void	annonce_action(t_philo *philo, enum e_state state, struct timeval *now)
+void	annonce_action(t_philo *philo, enum e_state state, long now)
 {
 	long time;
 
-	time = get_time_diff(&philo->data->start, now);
+	time = now - philo->data->start;
 	gen_msg(philo, state, time);
 }

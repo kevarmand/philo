@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 10:09:38 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/31 11:26:18 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:48:14 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,16 @@
  */
 #define M_ACTION 0xFF00000000000000
 #define M_ID 0x00FF000000000000
-#define M_INST 0x0000FFFFFFFFFFFF
+#define M_TIME 0x0000FFFFFFFFFFFF
 
 /***
- * Forwar declaration
+ * Forward declaration
  */
 typedef struct s_philo t_philo;
 typedef struct s_data t_data;
+typedef struct s_fork t_fork;
+typedef struct s_sim_is_running t_sim_is_running;
 enum e_state;
-
-typedef struct s_display
-{
-	char	*str;
-	int		len;
-	int		id_philo;
-	int		time;
-	int		emoji;
-	int		color;
-}	t_display;
 
 
 typedef struct s_msg_fifo
@@ -53,19 +45,26 @@ typedef struct s_msg_fifo
 	int				current_idx;//index de la liste
 	int				last_idx; 	//dernier index de la liste
 	pthread_mutex_t	mutex;		//mutex pour la liste
-	int				sim_is_running;		//flag de mort ()
 }	t_msg_fifo;
+
+
+typedef struct s_data_monitoring
+{
+	long				*lst_instr;
+	long				*lst_last_meal;
+	t_msg_fifo			*tab_msg;
+	t_fork				*fork_drawer;
+	t_sim_is_running	*sim_is_running;
+}	t_data_monitoring;
 
 void	gen_str(char *str, long instr, int flag, t_data *data);
 void	gen_msg(t_philo *philo, enum e_state state, long time);
-void	*printer(void *data);
+void	*monitoring(void *data);
 void	print_update(long *lst_instr, t_data *data);
 long	check_min(long *lst_instr, t_data *data);
 
 void	print_add(t_msg_fifo *msg_queue, long msg);
 long	print_get(t_msg_fifo *msg_queue);
-void	print_destroy(t_msg_fifo *tab_msg, int nb);
-int		print_init (t_msg_fifo **tab_msg, int nb_philo);
 
 /***
  * maessage generation function

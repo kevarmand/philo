@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_init.c                                       :+:      :+:    :+:   */
+/*   sim_is_running.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/20 10:46:05 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/27 16:43:40 by kearmand         ###   ########.fr       */
+/*   Created: 2025/04/01 15:48:31 by kearmand          #+#    #+#             */
+/*   Updated: 2025/04/01 16:11:04 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	print_init(t_msg_fifo **tab_msg, int nb_philo)
+int	init_sim_is_running(t_sim_is_running **sim_is_running, long nb_philo)
 {
 	int	i;
 
-	*tab_msg = malloc(sizeof(t_msg_fifo) * nb_philo);
-	if (!*tab_msg)
+	*sim_is_running = malloc(sizeof(t_sim_is_running) * nb_philo);
+	if (!*sim_is_running)
 		return (MALLOC_FAIL);
+	//init mutex
 	i = 0;
 	while (i < nb_philo)
 	{
-		(*tab_msg)[i].current_idx = 0;
-		(*tab_msg)[i].last_idx = 0;
-		(*tab_msg)[i].sim_is_running = 1;
-		if (pthread_mutex_init(&(*tab_msg)[i].mutex, NULL))
+		(*sim_is_running)[i].state = 1;
+		if (pthread_mutex_init(&(*sim_is_running)[i].mutex, NULL))
 		{
-			print_destroy(*tab_msg, i);
+			destroy_sim_is_running(*sim_is_running, i);
+			*sim_is_running = NULL;
 			return (MUTEX_FAIL);
 		}
 		i++;
@@ -35,15 +35,17 @@ int	print_init(t_msg_fifo **tab_msg, int nb_philo)
 	return (0);
 }
 
-void	print_destroy(t_msg_fifo *tab_msg, int nb)
+void destroy_sim_is_running(t_sim_is_running *sim_is_running, long nb_philo)
 {
 	int	i;
 
+	if (!sim_is_running)
+		return ;
 	i = 0;
-	while (i < nb)
+	while (i < nb_philo)
 	{
-		pthread_mutex_destroy(&tab_msg[i].mutex);
+		pthread_mutex_destroy(&sim_is_running[i].mutex);
 		i++;
 	}
-	free (tab_msg);
+	free(sim_is_running);
 }

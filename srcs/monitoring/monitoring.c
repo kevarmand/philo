@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:22:51 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/31 11:12:30 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:25:17 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ static int print_data_init(long **lst_instr, long **lst_last_meal, t_data *data)
 	return (0);
 }
 
-static void wait_for_begin(struct timeval *start)
+static void wait_for_begin(long start)
 {
-	struct timeval	now;
-	long			time;
+	long	now;
+	long	time;
 
-	gettimeofday(&now, NULL);
-	time = get_time_diff(&now, start);
-	precise_sleep(&now, time);
+	now = ft_get_time();
+	time = start - now;
+	precise_sleep(now, time);
 }
 
 void update_eat(long *lst_last_meal, long min)
@@ -49,7 +49,7 @@ void update_eat(long *lst_last_meal, long min)
 
 	if (action == EATING)
 	{
-		lst_last_meal[id] = (min & M_INST);
+		lst_last_meal[id] = (min & M_TIME);
 	}
 	if (action == END)
 		lst_last_meal[id] = -1;
@@ -80,7 +80,7 @@ void init_str(char *str)
 	}
 }
 
-void	*printer(void *data1)
+void	*monitoring(void *data1)
 {
 	t_data	*data;
 	long	*lst_instr;
@@ -93,7 +93,7 @@ void	*printer(void *data1)
 	init_str(str);
 	if (print_data_init(&lst_instr, &lst_last_meal, data))
 		return (NULL);
-	wait_for_begin(&data->start);
+	wait_for_begin(data->start);
 	while (1)
 	{
 		print_update(lst_instr, data);

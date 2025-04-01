@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 13:42:35 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/28 15:51:56 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:38:02 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_update(long *lst_instr, t_data *data)
 	while (i < nb_philo)
 	{
 		if (lst_instr[i] == -1)
-			lst_instr[i] = print_get(&data->tab_queue[i]);
+			lst_instr[i] = print_get(&data->shared.tab_msg[i]);
 		i++;
 	}
 }
@@ -41,7 +41,7 @@ long	check_min(long *lst_instr, t_data *data)
 	{
 		if (lst_instr[i] != -1)
 		{
-			if (min == -1 || (M_INST & (lst_instr[i])) < (M_INST & min))
+			if (min == -1 || (M_TIME & (lst_instr[i])) < (M_TIME & min))
 				min = lst_instr[i];
 		}
 		i++;

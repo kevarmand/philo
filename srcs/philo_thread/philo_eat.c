@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 10:02:21 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/31 13:16:08 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/03/31 15:03:31 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	free_forks(t_philo *philo)
 	pthread_mutex_unlock(&philo->right_fork->mutex);
 }
 
-int	try_take_fork(t_philo *philo, t_fork *fork, struct timeval *time)
+int	try_take_fork(t_philo *philo, t_fork *fork, long time)
 {
 	int	ret;
 	
@@ -40,7 +40,7 @@ int	try_take_fork(t_philo *philo, t_fork *fork, struct timeval *time)
 	return (ret);
 }
 
-void	take_forks(t_philo *philo, struct timeval *time)
+void	take_forks(t_philo *philo, long *time)
 {
 	int				fork_left;
 	int				fork_right;
@@ -49,34 +49,33 @@ void	take_forks(t_philo *philo, struct timeval *time)
 	fork_right = 0;
 	while (fork_left == 0 && fork_right == 0)
 	{
-		fork_left = try_take_fork(philo, philo->left_fork, time);
-		fork_right = try_take_fork(philo, philo->right_fork, time);
+		fork_left = try_take_fork(philo, philo->left_fork, *time);
+		fork_right = try_take_fork(philo, philo->right_fork, *time);
 		if (fork_left == 1 || fork_right == 1)
 			break ;	
 		usleep(10);
-		gettimeofday(time, NULL);
+		*time = ft_get_time();
 	}
 	while (fork_left == 0)
 	{
-		fork_left = try_take_fork(philo, philo->left_fork, time);
+		fork_left = try_take_fork(philo, philo->left_fork, *time);
 		usleep(10);
-		gettimeofday(time, NULL);
+		*time = ft_get_time();
 	}
 	while (fork_right == 0)
 	{
-		fork_right = try_take_fork(philo, philo->right_fork, time);
+		fork_right = try_take_fork(philo, philo->right_fork, *time);
 		usleep(10);
-		gettimeofday(time, NULL);
+		*time = ft_get_time();
 	}
 }
 
-void	philo_eat(t_philo *philo, struct timeval *now)
+void	philo_eat(t_philo *philo, long *now)
 {
 	take_forks(philo, now);
-	gettimeofday(now, NULL);
-	annonce_action(philo, EATING, now);
+	annonce_action(philo, EATING, *now);
 	philo->time_last_meat = *now;
-	precise_sleep(now, (long)philo->data->time_to_eat);
+	precise_sleep(*now, philo->data->time_to_eat);
 	free_forks(philo);
 	philo->nb_eat++;
 }
