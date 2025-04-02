@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:42:15 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/31 08:41:55 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:31:10 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,5 @@ enum e_error
 	DEATH,
 	WRONG_FLAG
 };
-
 
 #endif

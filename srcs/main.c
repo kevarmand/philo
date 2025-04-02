@@ -6,13 +6,13 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:06:51 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/02 13:01:34 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/02 15:20:32 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int main2(t_data *data)
+int start_simulation(t_data *data)
 {
 	int			err;
 	pthread_t	*thread;
@@ -26,7 +26,7 @@ int main2(t_data *data)
 			pthread_join(monithread, NULL);
 	}	
 	philo_leave(thread, err);
-	free(thread);
+	free (thread);
 	return (err);
 }
 
@@ -45,8 +45,7 @@ int main(int ac, char **av)
 	if (!err)
 		err = init_shared_data(&data);
 	if (!err)
-		err = main2(&data);
+		err = start_simulation(&data);
 	destroy_shared_data(&data);
-
 	return (err);
 }

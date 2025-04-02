@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:03:06 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/02 15:06:13 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:25:21 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	check_apetite(t_data *data)
 	status += check_satiety(data);
 	return (status);
 }
+
 int	check_starvation(t_data *data)
 {
 	int		i;
@@ -40,7 +41,7 @@ int	check_starvation(t_data *data)
 			diff = now - lst_last_meal[i];
 			if (diff > data->time_to_die)
 			{
-				printf("philo %d is dead\n", i + 1); //ICI TODO
+				printf_philo_die(i, now, data->flag);
 				return (1);
 			}
 		}

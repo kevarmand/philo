@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 13:54:25 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/02 09:12:01 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:09:55 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
  * 
  * @param start the start of the simulation
  * @return int the time in microsecond
- * 
  */
 long	get_runtime(long start)
 {
@@ -29,13 +28,12 @@ long	get_runtime(long start)
 	return (time);
 }
 
-
 /***
  * @brief precise sleep function
  * 
  * On va peut etre rajouter un sim_is_running
  * Use usleep to wait for the time
- * Use a spinlock to wait the last second
+ * Use a spinlock to wait the last msecond
  * @param start the start of the event
  * @param time the time to wait (in microsecond)
  */

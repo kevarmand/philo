@@ -6,12 +6,12 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 10:09:38 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/02 14:51:52 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:31:59 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_H
-# define PRINT_H
+#ifndef MONITORING_H
+# define MONITORING_H
 
 # include <pthread.h>
 # include "philo.h"
@@ -19,7 +19,7 @@
 # define SIZE_LIST 50
 
 /****
- * Decoupage des instruction 
+ * Decoupage des msg
  * Long = 64 bits
  * 1er octet = type D ACTION
  * 2eme octet = id du philo
@@ -41,12 +41,11 @@ enum e_state;
 
 typedef struct s_msg_fifo
 {
-	long			buffer[SIZE_LIST]; //liste d intruction
-	int				current_idx;//index de la liste
-	int				last_idx; 	//dernier index de la liste
-	pthread_mutex_t	mutex;		//mutex pour la liste
+	long			buffer[SIZE_LIST];
+	int				current_idx;
+	int				last_idx;
+	pthread_mutex_t	mutex;
 }	t_msg_fifo;
-
 
 typedef struct s_data_monitoring
 {
@@ -62,6 +61,8 @@ long 	encode_msg(long id, enum e_state state, long time);
 void	*watchdog(void *data1);
 void	update_msg(t_data *data);
 long	get_latest(t_data *data);
+
+void 	printf_philo_die(int id, long time, int flag);
 
 int display_event(t_data *data, char *str, long min);
 

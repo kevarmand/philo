@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:09:08 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/02 15:01:47 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:23:53 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,20 @@ long 	encode_msg(long id, enum e_state state, long time)
 	msg += (id << 48);
 	msg += (long)time;
 	return (msg);
+}
+
+/***
+ * @brief print the message without the buffer
+ * 
+ * //generate the message
+ * //print the message
+ */
+void	printf_philo_die(int id, long time, int flag)
+{
+	long	msg;
+	char	str[100];
+
+	msg = encode_msg(id, DIED, time);
+	build_str(str, msg, flag, NULL);
+	printf("%s", str);
 }
