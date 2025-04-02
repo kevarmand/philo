@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_add.c                                       :+:      :+:    :+:   */
+/*   msg_buffer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:17:06 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/20 11:20:01 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/02 14:15:45 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	print_add(t_msg_fifo *msg_queue, long msg)
+void	add_msg(t_msg_fifo *msg_queue, long msg)
 {
 	pthread_mutex_lock(&msg_queue->mutex);
 	msg_queue->buffer[msg_queue->last_idx] = msg;
@@ -20,7 +20,7 @@ void	print_add(t_msg_fifo *msg_queue, long msg)
 	pthread_mutex_unlock(&msg_queue->mutex);
 }
 
-long	print_get(t_msg_fifo *msg_queue)
+long	get_msg(t_msg_fifo *msg_queue)
 {
 	long	msg;
 

@@ -57,20 +57,22 @@ SRC			=	data/data.c\
 				main.c\
 				parsing.c\
 				error_msg.c\
-				print_msg.c\
 				str_utils.c\
 				time.c\
 				philo_arrival.c\
 				philo_thread/philo_init.c\
+				philo_thread/alone.c\
 				philo_thread/philo_eat.c\
 				philo_thread/philo_sleep.c\
 				philo_thread/philo_think.c\
 				philo_thread/philo_delay.c\
-				monitoring/monitoring.c\
-				monitoring/print_update.c\
-				monitoring/print_add.c\
-				monitoring/check_starvation.c\
-				monitoring/gen_instruction.c
+				monitoring/watchdog.c\
+				monitoring/check_apetite.c\
+				monitoring/display_event.c\
+				monitoring/update_msg.c\
+				format/format.c\
+				format/gen_msg.c\
+				format/msg_buffer.c
 
 
 

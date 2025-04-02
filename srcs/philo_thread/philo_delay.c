@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 15:58:16 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/01 16:50:44 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/02 09:04:31 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	wait_for_start(long start, t_philo *philo)
 	{
 		time += delay * (philo->id);
 		if (philo->id % 2)
-			time += philo->data->time_to_eat - 200;
+			time += philo->data->time_to_eat - 100;
 	}
 	else if ((philo->id % 2))
 		time += philo->data->time_to_eat;

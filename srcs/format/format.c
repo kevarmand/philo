@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_msg.c                                        :+:      :+:    :+:   */
+/*   format.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:10:52 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/31 15:04:45 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/02 15:14:42 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,8 @@ void	add_vanilla_time(long time, char *str)
 
 void	add_id(int id, char *str)
 {
-	ft_custom_itoa(id, str + ft_strlen(str));
+	ft_custom_itoa(id + 1, str + ft_strlen(str));
 	ft_strcat(str, " ");
-		//rajouter des espaces pour toujours avoir 3 caracteres
 	if (id < 10)
 		ft_strcat(str, " ");
 	if (id < 100)
@@ -120,7 +119,9 @@ void	add_emoji(enum e_state state, char *str)
 void	annonce_action(t_philo *philo, enum e_state state, long now)
 {
 	long time;
+	long msg;
 
 	time = now - philo->data->start;
-	gen_msg(philo, state, time);
+	msg = encode_msg(philo->id, state, time);
+	add_msg(philo->data->shared.tab_msg + philo->id, msg);
 }

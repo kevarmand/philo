@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:44:04 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/12 15:51:18 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/02 14:16:51 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,4 @@ static void	usage_msg2(void)
 	printf(" time in milliseconds it takes for a philosopher to sleep\n    ➡️  INTEGER [1-INT_MAX]\n\n");
 	printf("%s%snumber_of_time_each_philosophers_must_eat : (Optional)\n    %s➡️ ", MAGENTA, BOLD, RESET);
 	printf(" number of time each philosopher must eat\n    ➡️  INTEGER [1-INT_MAX]\n\n");
-	
 }

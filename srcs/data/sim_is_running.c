@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:48:31 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/01 16:11:04 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/02 10:25:53 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,10 @@ int	init_sim_is_running(t_sim_is_running **sim_is_running, long nb_philo)
 	*sim_is_running = malloc(sizeof(t_sim_is_running) * nb_philo);
 	if (!*sim_is_running)
 		return (MALLOC_FAIL);
-	//init mutex
 	i = 0;
 	while (i < nb_philo)
 	{
-		(*sim_is_running)[i].state = 1;
+		(*sim_is_running)[i].state = 0;
 		if (pthread_mutex_init(&(*sim_is_running)[i].mutex, NULL))
 		{
 			destroy_sim_is_running(*sim_is_running, i);

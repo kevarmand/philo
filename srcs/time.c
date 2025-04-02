@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 13:54:25 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/01 16:37:28 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/02 09:12:01 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
  * @return int the time in microsecond
  * 
  */
-
 long	get_runtime(long start)
 {
 	struct timeval	now;

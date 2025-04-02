@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:07:15 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/01 16:09:50 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/02 13:13:15 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ int		philosophers_arrival(t_data *data, pthread_t **thread);
 void	philo_leave(pthread_t *thread, int nb);
 void	*philo_presentation(void *data);
 int		is_sim_running(t_data *data, int id);
+int		alone_launch(t_data *data);
 
 /***
  * data init function

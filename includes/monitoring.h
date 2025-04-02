@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 10:09:38 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/01 16:48:14 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/02 14:51:52 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,23 @@ typedef struct s_msg_fifo
 
 typedef struct s_data_monitoring
 {
-	long				*lst_instr;
+	long				*lst_msg;
 	long				*lst_last_meal;
 	t_msg_fifo			*tab_msg;
 	t_fork				*fork_drawer;
 	t_sim_is_running	*sim_is_running;
 }	t_data_monitoring;
 
-void	gen_str(char *str, long instr, int flag, t_data *data);
-void	gen_msg(t_philo *philo, enum e_state state, long time);
-void	*monitoring(void *data);
-void	print_update(long *lst_instr, t_data *data);
-long	check_min(long *lst_instr, t_data *data);
+void	build_str(char *str, long instr, int flag, t_data *data);
+long 	encode_msg(long id, enum e_state state, long time);
+void	*watchdog(void *data1);
+void	update_msg(t_data *data);
+long	get_latest(t_data *data);
 
-void	print_add(t_msg_fifo *msg_queue, long msg);
-long	print_get(t_msg_fifo *msg_queue);
+int display_event(t_data *data, char *str, long min);
+
+void	add_msg(t_msg_fifo *msg_queue, long msg);
+long	get_msg(t_msg_fifo *msg_queue);
 
 /***
  * maessage generation function
@@ -80,7 +82,7 @@ long	print_get(t_msg_fifo *msg_queue);
 /***
  * print advanced
  */
-int		check_starvation(long *lst_last_meal, t_data *data);
-void	end_simulation(t_data *data);
+int		check_apetite(t_data *data);
+void	end_simulation(t_data *data, int status);
 
 #endif

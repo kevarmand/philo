@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:18:12 by kearmand          #+#    #+#             */
-/*   Updated: 2025/03/31 10:17:51 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/02 13:24:58 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static int	custom_atoi(char *str, long *number)
 	return (0);
 }
 
-
 static int	check_value(t_data *data)
 {
 	if (data->nb_philo < 1 || data->time_to_die < 60 || data->time_to_eat < 60
@@ -42,7 +41,8 @@ static int	check_value(t_data *data)
 		return (1);
 	if (data->time_to_die < data->time_to_eat)
 	{
-		printf("Un peu de bon sens, un philosophe ne peut pas mourir avant d'avoir mangé\n");
+		printf("Un peu de bon sens, un philosophe");
+		printf(" ne peut pas mourir avant d'avoir fini de manger\n");
 		return (1);
 	}
 	return (0);

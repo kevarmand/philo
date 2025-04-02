@@ -1,39 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_update.c                                     :+:      :+:    :+:   */
+/*   update_msg.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 13:42:35 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/01 16:38:02 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/02 14:14:30 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	print_update(long *lst_instr, t_data *data)
+void	update_msg(t_data *data)
 {
 	int		i;
 	int		nb_philo;
+	long	*lst_instr;
 
+	lst_instr = data->shared.lst_msg;
 	nb_philo = data->nb_philo;
 	i = 0;
 	while (i < nb_philo)
 	{
 		if (lst_instr[i] == -1)
-			lst_instr[i] = print_get(&data->shared.tab_msg[i]);
+			lst_instr[i] = get_msg(&data->shared.tab_msg[i]);
 		i++;
 	}
 }
 
-long	check_min(long *lst_instr, t_data *data)
+long	get_latest(t_data *data)
 {
 	long	min;
 	int		i;
 	int		nb_philo;
-	
+	long	*lst_instr;
 
+	lst_instr = data->shared.lst_msg;
 	nb_philo = data->nb_philo;
 	i = 0;
 	min = -1;
