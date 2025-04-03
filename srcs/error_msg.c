@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:44:04 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/02 14:16:51 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/03 09:43:47 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,22 @@ static void	usage_msg(void)
 	printf(RESET);
 	printf("}\n");
 }
+
 static void	usage_msg2(void)
 {
 	printf("\n%s%snumber_of_philosopher :\n    %s➡️ ", CYAN, BOLD, RESET);
 	printf(" number of philosopher (and forks)\n    ➡️  INTEGER [1-200]\n\n");
 	printf("%s%stime_to_die :\n    %s➡️ ", GREEN, BOLD, RESET);
-	printf(" time in milliseconds before a philosopher dies\n    ➡️  INTEGER [1-INT_MAX]\n\n");
+	printf(" time in milliseconds before a philosopher dies\n    ➡️");
+	printf("  INTEGER [1-INT_MAX]\n\n");
 	printf("%s%stime_to_eat :\n    %s➡️ ", YELLOW, BOLD, RESET);
-	printf(" time in milliseconds it takes for a philosopher to eat\n    ➡️  INTEGER [1-INT_MAX]\n\n");
+	printf(" time in milliseconds it takes for a philosopher to eat\n    ➡️");
+	printf("  INTEGER [1-INT_MAX]\n\n");
 	printf("%s%stime_to_sleep :\n    %s➡️ ", BLUE, BOLD, RESET);
-	printf(" time in milliseconds it takes for a philosopher to sleep\n    ➡️  INTEGER [1-INT_MAX]\n\n");
-	printf("%s%snumber_of_time_each_philosophers_must_eat : (Optional)\n    %s➡️ ", MAGENTA, BOLD, RESET);
-	printf(" number of time each philosopher must eat\n    ➡️  INTEGER [1-INT_MAX]\n\n");
+	printf(" time in milliseconds it takes for a philosopher to sleep\n    ➡️");
+	printf("  INTEGER [1-INT_MAX]\n\n");
+	printf("%s%snumber_of_time_each_philosophers_must_eat : ", MAGENTA, BOLD);
+	printf("ptional)\n    %s➡️ ", RESET);
+	printf(" number of time each philosopher must eat\n    ➡️");
+	printf("  INTEGER [1-INT_MAX]\n\n");
 }

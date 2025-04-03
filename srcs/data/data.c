@@ -6,13 +6,13 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 09:37:05 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/02 12:06:00 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/03 09:45:26 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void init_data(t_data *data)
+void	init_data(t_data *data)
 {
 	data->nb_philo = 0;
 	data->philo_id = 0;
@@ -45,7 +45,7 @@ int	init_shared_data(t_data *data)
 	if (!err)
 		err = init_fork_drawer(&data->shared.fork_drawer, data->nb_philo);
 	if (!err)
-		err = init_sim_is_running(&data->shared.sim_is_running, data->nb_philo);	
+		err = init_sim_is_running(&data->shared.sim_is_running, data->nb_philo);
 	return (err);
 }
 

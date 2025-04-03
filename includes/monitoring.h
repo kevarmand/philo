@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 10:09:38 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/02 17:31:59 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/03 10:31:18 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,18 @@
  * 2eme octet = id du philo
  * 3-8eme octet = temps de l instruction
  */
-#define M_ACTION 0xFF00000000000000
-#define M_ID 0x00FF000000000000
-#define M_TIME 0x0000FFFFFFFFFFFF
+# define M_ACTION 0xFF00000000000000
+# define M_ID 0x00FF000000000000
+# define M_TIME 0x0000FFFFFFFFFFFF
 
 /***
  * Forward declaration
  */
-typedef struct s_philo t_philo;
-typedef struct s_data t_data;
-typedef struct s_fork t_fork;
-typedef struct s_sim_is_running t_sim_is_running;
-enum e_state;
-
+typedef struct s_philo			t_philo;
+typedef struct s_data			t_data;
+typedef struct s_fork			t_fork;
+typedef struct s_sim_is_running	t_sim_is_running;
+enum							e_state;
 
 typedef struct s_msg_fifo
 {
@@ -57,28 +56,27 @@ typedef struct s_data_monitoring
 }	t_data_monitoring;
 
 void	build_str(char *str, long instr, int flag, t_data *data);
-long 	encode_msg(long id, enum e_state state, long time);
+long	encode_msg(long id, enum e_state state, long time);
 void	*watchdog(void *data1);
 void	update_msg(t_data *data);
 long	get_latest(t_data *data);
 
-void 	printf_philo_die(int id, long time, int flag);
-
-int display_event(t_data *data, char *str, long min);
+void	printf_philo_die(int id, long time, int flag);
+int		display_event(t_data *data, char *str, long min);
 
 void	add_msg(t_msg_fifo *msg_queue, long msg);
 long	get_msg(t_msg_fifo *msg_queue);
 
 /***
- * maessage generation function
+ * Format string
  */
 
- void	add_id(int id, char *str);
- void	add_action(enum e_state state, char *str);
- void	add_time(int time, char *str);
- void	add_vanilla_time(long time, char *str);
- void	add_emoji(enum e_state state, char *str);
- void	add_color(int id, char *str);
+void	add_id(int id, char *str);
+void	add_action(enum e_state state, char *str);
+void	add_time(int time, char *str);
+void	add_vanilla_time(long time, char *str);
+void	add_emoji(enum e_state state, char *str);
+void	add_color(int id, char *str);
 
 /***
  * print advanced

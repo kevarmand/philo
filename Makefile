@@ -71,6 +71,7 @@ SRC			=	data/data.c\
 				monitoring/display_event.c\
 				monitoring/update_msg.c\
 				format/format.c\
+				format/format2.c\
 				format/gen_msg.c\
 				format/msg_buffer.c
 

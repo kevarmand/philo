@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 13:54:25 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/02 17:09:55 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/03 09:24:52 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	precise_sleep(long start, long time)
 	}
 	while (time - elapsed > 100)
 	{
-		usleep((int)(time - elapsed)/2);
+		usleep((int)(time - elapsed) / 2);
 		now = ft_get_time();
 		elapsed = now - start;
 	}

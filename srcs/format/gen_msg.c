@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:09:08 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/02 17:23:53 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/03 10:09:01 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	build_str(char *str, long instr, int flag, t_data *data)
 	ft_strcat(str, "\n");
 }
 
-long 	encode_msg(long id, enum e_state state, long time)
+long	encode_msg(long id, enum e_state state, long time)
 {
 	long	msg;
 

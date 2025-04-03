@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:20:14 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/02 13:23:34 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/03 10:11:17 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,3 @@ int	alone_launch(t_data *data)
 	pthread_join(philo, NULL);
 	return (0);
 }
-

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fork_init.c                                        :+:      :+:    :+:   */
+/*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 09:34:44 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/01 16:10:46 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/03 09:45:41 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	destroy_fork_drawer(t_fork *fork_drawer, long nb)
 	free (fork_drawer);
 }
 
-int init_fork_drawer(t_fork **fork_drawer, long nb_philo)
+int	init_fork_drawer(t_fork **fork_drawer, long nb_philo)
 {
 	int	i;
 

@@ -6,11 +6,38 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:18:12 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/02 13:24:58 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/03 09:24:03 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static int	flag(t_data *data, int *ac, char ***av);
+static int	check_value(t_data *data);
+static int	custom_atoi(char *str, long *number);
+
+int	parsing(t_data *data, int ac, char **av)
+{
+	if (ac > 1 && flag(data, &ac, &av))
+		return (error_msg(WRONG_FLAG));
+	if (ac != 5 && ac != 6)
+		return (error_msg(WRONG_NB_ARG));
+	if (custom_atoi(av[1], &data->nb_philo)
+		|| custom_atoi(av[2], &data->time_to_die)
+		|| custom_atoi(av[3], &data->time_to_eat)
+		|| custom_atoi(av[4], &data->time_to_sleep))
+		return (error_msg(WRONG_ARG));
+	if (ac == 6)
+	{
+		if (custom_atoi(av[5], &data->nb_eat))
+			return (error_msg(WRONG_ARG));
+	}
+	else
+		data->nb_eat = -1;
+	if (check_value(data))
+		return (error_msg(WRONG_ARG));
+	return (0);
+}
 
 static int	custom_atoi(char *str, long *number)
 {
@@ -63,28 +90,5 @@ static int	flag(t_data *data, int *ac, char ***av)
 		return (1);
 	(*ac)--;
 	(*av)++;
-	return (0);
-}
-
-int		parsing(t_data *data, int ac, char **av)
-{
-	if (ac > 1 && flag(data, &ac, &av))
-		return (error_msg(WRONG_FLAG));
-	if (ac != 5 && ac != 6)
-		return (error_msg(WRONG_NB_ARG));
-	if (custom_atoi(av[1], &data->nb_philo)
-		|| custom_atoi(av[2], &data->time_to_die)
-		|| custom_atoi(av[3], &data->time_to_eat)
-		|| custom_atoi(av[4], &data->time_to_sleep))
-		return (error_msg(WRONG_ARG));
-	if (ac == 6)
-	{
-		if (custom_atoi(av[5], &data->nb_eat))
-			return (error_msg(WRONG_ARG));
-	}
-	else
-		data->nb_eat = -1;
-	if (check_value(data))
-		return (error_msg(WRONG_ARG));
 	return (0);
 }

@@ -6,25 +6,25 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:03:06 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/02 17:25:21 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/03 09:44:29 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	check_starvation(t_data *data);
-int	check_satiety(t_data *data);
+static int	check_starvation(t_data *data);
+static int	check_satiety(t_data *data);
 
 int	check_apetite(t_data *data)
 {
-	int status;
+	int	status;
 
 	status = check_starvation(data);
 	status += check_satiety(data);
 	return (status);
 }
 
-int	check_starvation(t_data *data)
+static int	check_starvation(t_data *data)
 {
 	int		i;
 	long	now;
@@ -50,7 +50,7 @@ int	check_starvation(t_data *data)
 	return (0);
 }
 
-int		check_satiety(t_data *data)
+static int	check_satiety(t_data *data)
 {
 	long	i;
 	long	*lst_last_meal;

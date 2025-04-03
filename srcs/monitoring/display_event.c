@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:28:55 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/02 17:24:48 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/03 09:44:41 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ static int	check_last_meal(t_data *data, long *lst_last_meal, long min)
 	time = (min & M_TIME);
 	if (time - lst_last_meal[id] >= data->time_to_die)
 	{
-		time  = data->time_to_die + lst_last_meal[id];
+		time = get_runtime(data->start);
 		printf_philo_die(id, time, data->flag);
 		return (1);
 	}
 	return (0);
 }
 
-static void update_last_meal(long *lst_last_meal, long min)
+static void	update_last_meal(long *lst_last_meal, long min)
 {
 	long	id;
 	long	action;

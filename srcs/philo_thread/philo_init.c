@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:56:47 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/02 15:28:08 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/03 10:13:28 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,17 @@ void	*philo_presentation(void *data1)
 	t_data	*data;
 
 	data = (t_data *)data1;
-	philo.data = data;;
-	//on utilise un mutex qui existe deja
+	philo.data = data;
 	pthread_mutex_lock(&data->shared.sim_is_running[0].mutex);
 	philo.id = data->philo_id;
 	data->philo_id++;
 	pthread_mutex_unlock(&data->shared.sim_is_running[0].mutex);
 	philo.nb_eat = 0;
 	philo.left_fork = &data->shared.fork_drawer[philo.id];
-	philo.right_fork = &data->shared.fork_drawer[(philo.id + 1) % data->nb_philo];
+	philo.right_fork = &data->shared.fork_drawer[(philo.id + 1)
+		% data->nb_philo];
 	philo.time_last_meat = data->start;
 	philo.next_action = EAT;
-	//wait le debut de la simulation
 	wait_for_start(data->start, &philo);
 	philo_life(&philo);
 	return (NULL);
@@ -53,10 +52,10 @@ void	next_action(t_philo *philo)
 
 void	philo_life(t_philo *philo)
 {
-	long 		time;
+	long		time;
 	static void	(*action[3])(t_philo *philo, long *now) = {philo_eat,
-				philo_sleep, philo_think};
-				
+		philo_sleep, philo_think};
+
 	while (1)
 	{
 		time = ft_get_time();
