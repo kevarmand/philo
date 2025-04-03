@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:44:04 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/03 14:25:29 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:30:13 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	error_msg(enum e_error err)
 	else if (err == ERROR_LOGICAL)
 	{
 		printf("Une peu de bon sens, voyons !\n");
-		printf("Un philosophe ne peut pas mourrir en mageant\n");
+		printf("Un philosophe ne peut pas mourir en mangeant\n");
 	}
 	else if (err == ERROR_MEAL)
 		printf("Error: wrong number of meals\n\n");
