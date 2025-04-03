@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 10:02:21 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/03 10:21:25 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:24:30 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@ static int	try_take_fork(t_philo *philo, t_fork *fork, long time);
 static void	take_one_fork(t_philo *philo, t_fork *fork, long *time);
 static void	take_forks(t_philo *philo, long *time);
 
+/***
+ * @brief try to take the forks and eat
+ * 
+ * @param *philo the philosopher structure
+ * @param *now the time
+ */
 void	philo_eat(t_philo *philo, long *now)
 {
 	take_forks(philo, now);

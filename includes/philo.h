@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:07:15 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/03 10:28:34 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:50:57 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@
 # include <unistd.h>
 # include <sys/time.h>
 
-# include "color.h"
 # include "error.h"
 # include "monitoring.h"
+# include "color.h"
 
 /***
  * Structure: t_fork
  * -------------------
  * state: -1 = taken
- * else : >= 0 = free
+ * else : free
  * mutex: mutex for the fork
  */
 typedef struct s_fork
@@ -40,7 +40,7 @@ typedef struct s_fork
  * Structure: t_sim_is_running
  * -------------------
  * state: 1 = running
- * else : 0
+ * else : not running
  */
 typedef struct s_sim_is_running
 {
@@ -105,7 +105,6 @@ int		parsing(t_data *data, int ac, char **av);
  * Function: string_utils
  */
 int		ft_strlen(char *str);
-void	ft_strcpy(char *dst, char *src);
 void	ft_strcat(char *dst, char *src);
 int		ft_strcmp(char *s1, char *s2);
 void	ft_custom_itoa(int n, char *str);
@@ -122,8 +121,7 @@ long	ft_get_time(void);
 /***
  * Function: philo_thread
  */
-int		philosophers_arrival(t_data *data, pthread_t **thread);
-void	philo_leave(pthread_t *thread, int nb);
+int		start_simulation(t_data *data);
 void	*philo_presentation(void *data);
 int		is_sim_running(t_data *data, int id);
 int		alone_launch(t_data *data);
@@ -145,8 +143,6 @@ void	destroy_shared_data(t_data *data);
  * Function: philo_life
  */
 void	philo_life(t_philo *philo);
-void	annonce_action(t_philo *philo, enum e_state state, long now);
-void	next_action(t_philo *philo);
 void	philo_eat(t_philo *philo, long *now);
 void	philo_sleep(t_philo *philo, long *now);
 void	philo_think(t_philo *philo, long *now);

@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alone.c                                            :+:      :+:    :+:   */
+/*   philo_control.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 09:20:14 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/03 13:26:46 by kearmand         ###   ########.fr       */
+/*   Created: 2025/04/03 11:21:09 by kearmand          #+#    #+#             */
+/*   Updated: 2025/04/03 13:25:59 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*alone(void *data1)
-{
-	t_data	*data;
-
-	data = (t_data *)data1;
-	printf("  000 1 has taken a fork\n");
-	usleep(data->time_to_die);
-	printf("%5.3ld 1 died\n", data->time_to_die / 1000);
-	return (NULL);
-}
-
 /***
- * @brief launch the simulation for one philosopher
+ * @brief check if the simulation is still running
  */
-int	alone_launch(t_data *data)
+int	is_sim_running(t_data *data, int id)
 {
-	pthread_t	philo;
+	int	ret;
 
-	if (pthread_create(&philo, NULL, alone, data))
-		return (1);
-	pthread_join(philo, NULL);
-	return (0);
+	pthread_mutex_lock(&data->shared.sim_is_running[id].mutex);
+	ret = data->shared.sim_is_running[id].state;
+	pthread_mutex_unlock(&data->shared.sim_is_running[id].mutex);
+	return (ret);
 }

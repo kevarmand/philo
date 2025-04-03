@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:28:55 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/03 09:44:41 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:40:59 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,15 @@
 static int	check_last_meal(t_data *data, long *lst_last_meal, long min);
 static void	update_last_meal(long *lst_last_meal, long min);
 
+/****
+ * @brief display the event
+ * 
+ * @param *data the data structure
+ * @param str the string to display
+ * @param min the message
+ * 
+ * @return int 0 if success, 1 if error
+ */
 int	display_event(t_data *data, char *str, long min)
 {
 	long	*lst_msg;

@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:18:12 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/03 09:24:03 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:18:36 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,15 @@ static int	flag(t_data *data, int *ac, char ***av);
 static int	check_value(t_data *data);
 static int	custom_atoi(char *str, long *number);
 
+/***
+ *@brief parsing the arguments
+ * 
+ *@param data the data structure
+ *@param ac the number of arguments
+ *@param av the arguments
+ * 
+ *@return int 0 if success, 1 if error
+ */
 int	parsing(t_data *data, int ac, char **av)
 {
 	if (ac > 1 && flag(data, &ac, &av))
@@ -39,6 +48,16 @@ int	parsing(t_data *data, int ac, char **av)
 	return (0);
 }
 
+/***
+ * @brief convert a string to an int
+ * 
+ * This implementation take care of INT_MAX and INT_MIN
+ * 
+ * @param str the string to convert
+ * @param number the number to fill
+ * 
+ * @return int 0 if success, 1 if error
+ */
 static int	custom_atoi(char *str, long *number)
 {
 	long	n;

@@ -6,12 +6,14 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 09:38:17 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/03 09:41:07 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:18:56 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
+/****
+ * string utils functions
+ */
 int	ft_strlen(char *str)
 {
 	int	i;
@@ -50,6 +52,12 @@ int	ft_strcmp(char *s1, char *s2)
 	return (s1[i] - s2[i]);
 }
 
+/***
+ * @brief convert an int to a given string
+ * 
+ * @param n the number to convert
+ * @param str the string to fill
+ */
 void	ft_custom_itoa(int n, char *str)
 {
 	int		i;

@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 10:09:38 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/03 10:31:18 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:52:01 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,13 @@ typedef struct s_fork			t_fork;
 typedef struct s_sim_is_running	t_sim_is_running;
 enum							e_state;
 
+/***
+ * Structure: t_msg_fifo
+ * -------------------
+ * buffer: lst of message
+ * current_idx: of the current message to be read
+ * last_idx: of the last message added
+ */
 typedef struct s_msg_fifo
 {
 	long			buffer[SIZE_LIST];
@@ -46,6 +53,15 @@ typedef struct s_msg_fifo
 	pthread_mutex_t	mutex;
 }	t_msg_fifo;
 
+/***
+ * Structure: t_data_monitoring
+ * -------------------
+ * lst_msg: list of message
+ * lst_last_meal: list of last meal
+ * tab_msg: list of message fifo
+ * fork_drawer: list of fork
+ * sim_is_running: list of simulation state
+ */
 typedef struct s_data_monitoring
 {
 	long				*lst_msg;
@@ -55,33 +71,47 @@ typedef struct s_data_monitoring
 	t_sim_is_running	*sim_is_running;
 }	t_data_monitoring;
 
-void	build_str(char *str, long instr, int flag, t_data *data);
-long	encode_msg(long id, enum e_state state, long time);
+/***
+ * Function: monitoring
+ */
 void	*watchdog(void *data1);
+
+/***
+ * function: checker and end
+ */
+int		check_apetite(t_data *data);
+void	end_simulation(t_data *data, int status);
+
+/***
+ * function: gestion of the message
+ */
 void	update_msg(t_data *data);
 long	get_latest(t_data *data);
 
-void	printf_philo_die(int id, long time, int flag);
-int		display_event(t_data *data, char *str, long min);
-
+/***
+ * function: queue
+ */
 void	add_msg(t_msg_fifo *msg_queue, long msg);
 long	get_msg(t_msg_fifo *msg_queue);
 
 /***
+ * Encryption and decryption of the message
+ */
+void	build_str(char *str, long instr, int flag, t_data *data);
+long	encode_msg(long id, enum e_state state, long time);
+
+/***
  * Format string
  */
+void	annonce_action(t_philo *philo, enum e_state state, long now);
+int		display_event(t_data *data, char *str, long min);
 
+void	printf_philo_die(int id, long time, int flag);
 void	add_id(int id, char *str);
 void	add_action(enum e_state state, char *str);
 void	add_time(int time, char *str);
 void	add_vanilla_time(long time, char *str);
 void	add_emoji(enum e_state state, char *str);
 void	add_color(int id, char *str);
-
-/***
- * print advanced
- */
-int		check_apetite(t_data *data);
-void	end_simulation(t_data *data, int status);
 
 #endif

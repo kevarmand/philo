@@ -6,29 +6,11 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:06:51 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/03 09:23:25 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/03 10:58:49 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	start_simulation(t_data *data)
-{
-	int			err;
-	pthread_t	*thread;
-	pthread_t	monithread;
-
-	data->start = ft_get_time() + 1000000;
-	err = philosophers_arrival(data, &thread);
-	if (err == data->nb_philo)
-	{
-		if (!pthread_create(&monithread, NULL, watchdog, data))
-			pthread_join(monithread, NULL);
-	}	
-	philo_leave(thread, err);
-	free (thread);
-	return (err);
-}
 
 int	main(int ac, char **av)
 {

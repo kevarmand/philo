@@ -6,11 +6,16 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 16:10:52 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/03 10:23:58 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:48:02 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+/***
+ * FUNCTIONs : take a string and add some information
+ * 
+ */
 
 void	add_id(int id, char *str)
 {
@@ -38,9 +43,7 @@ void	add_action(enum e_state state, char *str)
 }
 
 /***
- * Il existe aussi des couleurs dans la palette étendue (256 couleurs).
- * Les codes de couleurs supplémentaires sont définis entre \033[38;5;Xm, 
- * où X est le numéro de couleur (de 0 à 255).
+ *@brief add color depending on the philosopher id
  */
 void	add_color(int id, char *str)
 {
@@ -72,6 +75,13 @@ void	add_emoji(enum e_state state, char *str)
 		ft_strcat(str, "🎉 ");
 }
 
+/***
+ * @brief genereate the message and add it to the queue
+ * 
+ * @param *philo the philosopher structure
+ * @param state the state of the philosopher
+ * @param now the time of the event
+ */
 void	annonce_action(t_philo *philo, enum e_state state, long now)
 {
 	long	time;

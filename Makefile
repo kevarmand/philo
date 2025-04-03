@@ -59,8 +59,10 @@ SRC			=	data/data.c\
 				error_msg.c\
 				str_utils.c\
 				time.c\
-				philo_arrival.c\
+				thread_gestion.c\
 				philo_thread/philo_init.c\
+				philo_thread/philo_routine.c\
+				philo_thread/philo_control.c\
 				philo_thread/alone.c\
 				philo_thread/philo_eat.c\
 				philo_thread/philo_sleep.c\
@@ -70,6 +72,7 @@ SRC			=	data/data.c\
 				monitoring/check_apetite.c\
 				monitoring/display_event.c\
 				monitoring/update_msg.c\
+				monitoring/stop_simulation.c\
 				format/format.c\
 				format/format2.c\
 				format/gen_msg.c\

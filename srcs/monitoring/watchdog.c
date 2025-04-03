@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 11:22:51 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/02 15:13:01 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:39:45 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,14 @@ static void	wait_for_begin(long start);
 static void	init_str(char *str);
 static void	init_watchdog(t_data *data);
 
+/***
+ * @brief watchdog thread
+ * 
+ * Check the state of the simulation
+ * Print the events
+ * 
+ * @param *data the data structure
+ */
 void	*watchdog(void *data1)
 {
 	t_data	*data;

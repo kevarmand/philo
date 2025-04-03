@@ -6,12 +6,17 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 13:42:35 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/02 14:14:30 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:48:25 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+/***
+ * @brief update the message list
+ * 
+ * @param *data the data structure
+ */
 void	update_msg(t_data *data)
 {
 	int		i;
@@ -29,6 +34,12 @@ void	update_msg(t_data *data)
 	}
 }
 
+/***
+ * @brief get the latest message
+ * 
+ * @param *data the data structure
+ * @return the latest message
+ */
 long	get_latest(t_data *data)
 {
 	long	min;

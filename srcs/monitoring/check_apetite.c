@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:03:06 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/03 09:44:29 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:48:16 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 static int	check_starvation(t_data *data);
 static int	check_satiety(t_data *data);
 
+/***
+ * @brief check the state of the simulation
+ * 
+ * Check if a philosopher is starving
+ * Check if all philosophers are full
+ * 
+ * @param *data the data structure
+ */
 int	check_apetite(t_data *data)
 {
 	int	status;
@@ -65,29 +73,4 @@ static int	check_satiety(t_data *data)
 			return (0);
 	}
 	return (2);
-}
-
-/***
- * "kill all philo"
- */
-void	end_simulation(t_data *data, int status)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->nb_philo)
-	{
-		pthread_mutex_lock(&data->shared.sim_is_running[i].mutex);
-		data->shared.sim_is_running[i].state = 0;
-		pthread_mutex_unlock(&data->shared.sim_is_running[i].mutex);
-		i++;
-	}
-	printf("\n");
-	if (status == 1)
-		printf("🚑  🚑  A philosopher died, the simulation is over  🚑  🚑\n");
-	else if (status == 2)
-	{
-		printf("🎉  🎉  Everyone has finished eating, the simulation is over");
-		printf("  🎉  🎉\n");
-	}
 }

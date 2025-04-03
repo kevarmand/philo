@@ -6,12 +6,18 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 15:58:16 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/03 10:11:27 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:26:39 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+/***
+ * @brief Synchronize the start of the philosophers
+ * 
+ * @param start the start of the simulation
+ * @param philo the philosopher structure
+ */
 void	wait_for_start(long start, t_philo *philo)
 {
 	long			now;

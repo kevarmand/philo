@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:56:47 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/03 10:13:28 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:20:35 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 void	philo_life(t_philo *philo);
 
 /***
- * Attention l id du philo = data->philo_id
- * [ Ce nest pas son nom , le nom est n + 1]
+ * @brief initialize the philosopher (data/wait for start)
+ * 
+ * * @param *data the data structure (void *)
  */
 void	*philo_presentation(void *data1)
 {
@@ -38,33 +39,4 @@ void	*philo_presentation(void *data1)
 	wait_for_start(data->start, &philo);
 	philo_life(&philo);
 	return (NULL);
-}
-
-void	next_action(t_philo *philo)
-{
-	if (philo->next_action == EAT)
-		philo->next_action = SLEEP;
-	else if (philo->next_action == SLEEP)
-		philo->next_action = THINK;
-	else if (philo->next_action == THINK)
-		philo->next_action = EAT;
-}
-
-void	philo_life(t_philo *philo)
-{
-	long		time;
-	static void	(*action[3])(t_philo *philo, long *now) = {philo_eat,
-		philo_sleep, philo_think};
-
-	while (1)
-	{
-		time = ft_get_time();
-		if (!is_sim_running(philo->data, philo->id))
-			break ;
-		if (philo->data->nb_eat != -1 && philo->nb_eat >= philo->data->nb_eat)
-			break ;
-		action[philo->next_action](philo, &time);
-		next_action(philo);
-	}
-	annonce_action(philo, END, time);
 }
