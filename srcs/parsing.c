@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:18:12 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/03 13:18:36 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:26:45 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,7 @@ int	parsing(t_data *data, int ac, char **av)
 	}
 	else
 		data->nb_eat = -1;
-	if (check_value(data))
-		return (error_msg(WRONG_ARG));
-	return (0);
+	return (error_msg(check_value(data)));
 }
 
 /***
@@ -82,15 +80,15 @@ static int	custom_atoi(char *str, long *number)
 
 static int	check_value(t_data *data)
 {
-	if (data->nb_philo < 1 || data->time_to_die < 60 || data->time_to_eat < 60
-		|| data->time_to_sleep < 60 || (data->nb_eat != -1 && data->nb_eat < 1))
-		return (1);
+	if (data->nb_philo > 200 || data->nb_philo < 1)
+		return (ERROR_NB);
+	if (data->time_to_die < 60 || data->time_to_eat < 60
+		|| data->time_to_sleep < 60)
+		return (ERROR_TIME);
+	if (data->nb_eat != -1 && data->nb_eat < 1)
+		return (ERROR_MEAL);
 	if (data->time_to_die < data->time_to_eat)
-	{
-		printf("Un peu de bon sens, un philosophe");
-		printf(" ne peut pas mourir avant d'avoir fini de manger\n");
-		return (1);
-	}
+		return (ERROR_LOGICAL);
 	return (0);
 }
 
@@ -99,10 +97,6 @@ static int	flag(t_data *data, int *ac, char ***av)
 	data->flag = 0;
 	if ((*av)[1][0] != '-' || (*av)[1][1] != '-')
 		return (0);
-	if (ft_strchr((*av)[1], 'c'))
-		data->flag += 1;
-	if (ft_strchr((*av)[1], 't'))
-		data->flag += 2;
 	if (ft_strchr((*av)[1], 'a'))
 		data->flag = 3;
 	if (data->flag == 0)

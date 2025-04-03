@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:42:15 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/03 13:37:26 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:22:02 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,11 @@ enum e_error
 	MUTEX_FAIL = -4,
 	THREAD_FAIL = -5,
 	DEATH = -6,
-	WRONG_FLAG = -7
+	WRONG_FLAG = -7,
+	ERROR_NB = -8,
+	ERROR_MEAL = -9,
+	ERROR_LOGICAL = -10,
+	ERROR_TIME = -11
 };
 
 #endif

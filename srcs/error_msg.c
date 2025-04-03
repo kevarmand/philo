@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:44:04 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/03 09:43:47 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/03 14:25:29 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,17 @@ int	error_msg(enum e_error err)
 		printf("Error: wrong number of arguments\n\n");
 	else if (err == WRONG_ARG)
 		printf("Error: wrong arguments\n\n");
+	else if (err == ERROR_LOGICAL)
+	{
+		printf("Une peu de bon sens, voyons !\n");
+		printf("Un philosophe ne peut pas mourrir en mageant\n");
+	}
+	else if (err == ERROR_MEAL)
+		printf("Error: wrong number of meals\n\n");
+	else if (err == ERROR_TIME)
+		printf("timer must : 60ms < time < INT_MAX\n\n");
+	else if (err == ERROR_NB)
+		printf("number of philosopher must be between 1 and 200\n\n");
 	usage_msg();
 	usage_msg2();
 	return (err);

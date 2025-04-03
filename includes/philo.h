@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:07:15 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/03 13:50:57 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/03 13:56:56 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,16 +94,19 @@ typedef struct s_philo
 /***
  * Function: error_msg
  */
+
 int		error_msg(enum e_error err);
 
 /***
  * Function: parsing
  */
+
 int		parsing(t_data *data, int ac, char **av);
 
 /***
  * Function: string_utils
  */
+
 int		ft_strlen(char *str);
 void	ft_strcat(char *dst, char *src);
 int		ft_strcmp(char *s1, char *s2);
@@ -113,6 +116,7 @@ int		ft_strchr(char *str, char c);
 /***
  * Function: time
  */
+
 long	get_runtime(long start);
 void	wait_for_start(long star, t_philo *philo);
 void	precise_sleep(long start, long time);
@@ -121,6 +125,7 @@ long	ft_get_time(void);
 /***
  * Function: philo_thread
  */
+
 int		start_simulation(t_data *data);
 void	*philo_presentation(void *data);
 int		is_sim_running(t_data *data, int id);
@@ -129,6 +134,7 @@ int		alone_launch(t_data *data);
 /***
  * data init function
  */
+
 void	init_data(t_data *data);
 int		init_shared_data(t_data *data);
 int		init_queue(t_msg_fifo **tab_msg, int nb_philo);
@@ -142,6 +148,7 @@ void	destroy_shared_data(t_data *data);
 /***
  * Function: philo_life
  */
+
 void	philo_life(t_philo *philo);
 void	philo_eat(t_philo *philo, long *now);
 void	philo_sleep(t_philo *philo, long *now);
