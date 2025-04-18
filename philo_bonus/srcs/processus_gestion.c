@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 09:50:07 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/17 16:53:17 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/18 15:22:10 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 
 static int philosophers_arrival(t_data *data, pid_t *pid);
-static int philo_leave(pid_t *state, int nb);
+static int philo_leave(t_data *data);
 static int terminate_all(pid_t *state, int nb);
-static void mark_philo_dead(pid_t *state, pid_t pid, int nb);
 
 /***
  * Encapsulate the fork function
@@ -71,7 +70,8 @@ static int	philosophers_arrival(t_data *data, pid_t *pid)
 		}
 		i++;
 	}
-	return (philo_leave(pid, data->nb_philo));
+	data->pid = pid;
+	return (philo_leave(pid));
 }
 
 /***
@@ -85,30 +85,14 @@ static int	terminate_all(pid_t *state, int nb)
 	while (i < nb)
 	{
 		if (state[i] != 0)
-			kill(state[i], SIGKILL);
-		i++;
-	}
-	return (-1);
-}
-
-/***
- * @brief delete the line of the philo who is dead
- * 
- */
-void	mark_philo_dead(pid_t *state, pid_t pid, int nb)
-{
-	int	i;
-
-	i = 0;
-	while (i < nb)
-	{
-		if (state[i] == pid)
 		{
-			state[i] = 0;
-			return ;
+			printf("try kill %d-%d\n", state[i], i);
+			kill(state[i], SIGKILL);
+			printf("ok: kill %d-%d\n", state[i], i);
 		}
 		i++;
 	}
+	return (-1);
 }
 
 /***
@@ -118,35 +102,27 @@ void	mark_philo_dead(pid_t *state, pid_t pid, int nb)
  * 1 : dead =>kill all other philo
  * 0  : alive => wait for the other
 */
-static int	philo_leave(pid_t *state, int nb)
+static int	philo_leave(t_data *data)
 {
-	int		status;
-	pid_t	pid;
-	int		i;
+	pthread_t	watch_death_thread;
+	pthread_t	watch_full_thread;
 
-	usleep(2000000);
-	printf("%i\n", state[0]);
-	kill(state[0], SIGKILL);
-	i = nb;
-	while (i > 0)
+	if (pthread_create(&watch_full_thread, NULL, watch_full, data) != 0)
 	{
-		printf("waitpid\n");
-		pid = waitpid(-1, &status, 0);
-		printf("pid : %d\n", pid);
-		if (pid == -1)
-		{
-			error_msg(WAITPID_ERR);
-			terminate_all(state, nb);
-			return (-1);
-		}
-		if (WIFEXITED(status))
-		{
-			if (WEXITSTATUS(status) == 0)
-				mark_philo_dead(state, pid, nb);
-			else 
-				return (terminate_all(state, nb));
-			i--;
-		}
+		perror("pthread_create watch_full failed");
+		return (1);
 	}
+	if (pthread_create(&watch_death_thread, NULL, watch_death, data) != 0)
+	{
+		perror("pthread_create watch_death failed");
+		sem_wait(data->sem_main);
+		data->simulation = 1;
+		sem_post(data->sem_main);
+		sem_post(data->sem_full);
+		pthread_join(watch_full_thread, NULL);
+		return (1);
+	}
+	pthread_join(watch_full_thread, NULL);
+	pthread_join(watch_death_thread, NULL);
 	return (0);
 }

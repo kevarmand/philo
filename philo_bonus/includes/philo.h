@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:07:15 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/17 16:16:15 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/18 15:22:39 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,14 @@ typedef struct s_data
 	sem_t				*sem_forks_count;
 	sem_t				*sem_forks_access;
 	sem_t				*sem_print;
+	sem_t				*sem_death;
+	sem_t				*sem_full;
+	sem_t				*sem_main;
 	sem_t				**sem_meal_check;
+	pid_t				*pid;
 
 	int					nb_eat_done;
+	int					simulation;
 	long				time_last_meal;
 	enum e_action		next_action;
 }	t_data;
@@ -91,6 +96,12 @@ void	ft_custom_itoa(int n, char *str);
 int		ft_strchr(char *str, char c);
 
 /***
+ * watchmain
+ */
+void	*watch_full(void *data1);
+void	*watch_death(void *data1);
+
+/***
  * Function: time
  */
 
@@ -98,7 +109,7 @@ long	get_runtime(long start);
 void	wait_for_start(long start, t_data *data);
 void	precise_sleep(long start, long time);
 long	ft_get_time(void);
-
+void	ft_infinite_loop();
 /***
  * Function: philo_processus
  */

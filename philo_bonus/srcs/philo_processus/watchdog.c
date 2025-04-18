@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 11:21:09 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/17 16:50:52 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/18 14:24:34 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	*watchdog(void *data1)
 		if (get_runtime(time_last_meal) > data->time_to_die)
 		{
 			print_death(data, get_runtime(data->start));
-			printf("Philo %d is dead\n", id);
-			exit(-1);
+			sem_post(data->sem_death);
+			ft_infinite_loop();
 		}
 		usleep(618);
 	}

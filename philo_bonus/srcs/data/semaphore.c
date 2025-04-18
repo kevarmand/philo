@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 09:34:44 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/17 15:56:24 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/18 10:34:57 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ static void	destroy_semaphore(sem_t **sem, const char *name)
 {
 	if (*sem)
 	{
+		printf("destroying semaphore %s\n", name);
 		sem_close(*sem);
 		sem_unlink(name);
 		*sem = NULL;

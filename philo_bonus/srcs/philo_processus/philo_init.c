@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 10:56:47 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/17 16:08:50 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/18 11:14:37 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,18 @@
  */
 void	*philo_presentation(void *data1)
 {
-	t_data	*data;
-	pid_t	pid;
+	t_data		*data;
+	pthread_t	thread_id;
+	int			ret;
 
 	data = (t_data *)data1;
-
-	pid = fork();
-	if (pid == -1)
+	ret = pthread_create(&thread_id, NULL, watchdog, data);
+	if (ret != 0)
 	{
-		exit(1);
+		printf("Error: pthread_create\n");
+		return (NULL);
 	}
-	if (pid == 0)
-		watchdog(data);	
+	pthread_detach(thread_id);
 	wait_for_start(data->start, data);
 	philo_life(data);
 	return (NULL);
