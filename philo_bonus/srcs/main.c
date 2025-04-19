@@ -6,12 +6,11 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:06:51 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/17 15:57:20 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/19 16:30:16 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
 
 //On va  faire la meme chose aved des fork et de semaphores
 int	main(int ac, char **av)

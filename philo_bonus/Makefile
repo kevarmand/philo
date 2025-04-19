@@ -57,6 +57,7 @@ SRC			=	data/data.c\
 				error_msg.c\
 				str_utils.c\
 				time.c\
+				watcher.c\
 				processus_gestion.c\
 				philo_processus/philo_init.c\
 				philo_processus/philo_routine.c\

@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:09:08 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/17 16:19:29 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/19 16:35:15 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	build_str(char *str, long time, enum e_state action, t_data *data)
 		add_color(id, str);
 	add_id(id, str);
 	add_action(state, str);
-	if (data->flag)	
+	if (data->flag)
 		add_color(-1, str);
 	ft_strcat(str, "\n");
 }

@@ -6,16 +6,16 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 09:50:07 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/18 15:22:10 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/19 16:31:00 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-
-static int philosophers_arrival(t_data *data, pid_t *pid);
-static int philo_leave(t_data *data);
-static int terminate_all(pid_t *state, int nb);
+static int	philosophers_arrival(t_data *data, pid_t *pid);
+static int	philo_leave(t_data *data);
+static int	end_simulation(t_data *data);
+void		terminate_all(pid_t *state, int nb);
 
 /***
  * Encapsulate the fork function
@@ -71,28 +71,25 @@ static int	philosophers_arrival(t_data *data, pid_t *pid)
 		i++;
 	}
 	data->pid = pid;
-	return (philo_leave(pid));
+	return (end_simulation(data));
 }
 
 /***
  * @brief Terminate all the children-processus
  */
-static int	terminate_all(pid_t *state, int nb)
+void	terminate_all(pid_t *state, int nb)
 {
 	int	i;
-	printf("kill all\n");
+
 	i = 0;
 	while (i < nb)
 	{
 		if (state[i] != 0)
 		{
-			printf("try kill %d-%d\n", state[i], i);
 			kill(state[i], SIGKILL);
-			printf("ok: kill %d-%d\n", state[i], i);
 		}
 		i++;
 	}
-	return (-1);
 }
 
 /***
@@ -102,7 +99,7 @@ static int	terminate_all(pid_t *state, int nb)
  * 1 : dead =>kill all other philo
  * 0  : alive => wait for the other
 */
-static int	philo_leave(t_data *data)
+static int	end_simulation(t_data *data)
 {
 	pthread_t	watch_death_thread;
 	pthread_t	watch_full_thread;
@@ -122,7 +119,36 @@ static int	philo_leave(t_data *data)
 		pthread_join(watch_full_thread, NULL);
 		return (1);
 	}
+	philo_leave(data);
 	pthread_join(watch_full_thread, NULL);
 	pthread_join(watch_death_thread, NULL);
+	return (0);
+}
+
+/***
+ * @brief Wait for all the philosophers to leave
+ * @param *data : the data structure
+ * @return 0 if success
+ * @return -1 if error
+ */
+static int	philo_leave(t_data *data)
+{
+	int	i;
+	int	status;
+
+	i = 0;
+	while (i < data->nb_philo)
+	{
+		waitpid(data->pid[i], &status, 0);
+		if (WIFEXITED(status))
+		{
+			if (WEXITSTATUS(status) == 1)
+			{
+				terminate_all(data->pid, data->nb_philo);
+				return (1);
+			}
+		}
+		i++;
+	}
 	return (0);
 }

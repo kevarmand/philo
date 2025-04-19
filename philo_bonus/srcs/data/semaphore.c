@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 09:34:44 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/18 10:34:57 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/19 16:34:51 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,20 @@ static void		destroy_semaphore(sem_t **sem, const char *name);
 
 void	destroy_semaphores(t_data *data)
 {
-	int	i;
-	static char sem_array[30] = "/sem_meal_check_XX";
-	
+	int			i;
+	static char	sem_array[30] = "/sem_meal_check_XX";
+
 	destroy_semaphore(&data->sem_forks_count, "/sem_forks_count");
 	destroy_semaphore(&data->sem_forks_access, "/sem_forks_access");
 	destroy_semaphore(&data->sem_print, "/sem_print");
+	destroy_semaphore(&data->sem_main, "/sem_main");
+	destroy_semaphore(&data->sem_death, "/sem_death");
+	destroy_semaphore(&data->sem_full, "/sem_full");
 	i = 0;
 	while (i < data->nb_philo)
 	{
-		sem_array[17] = (i / 16) + 'A';
-		sem_array[18] = (i % 16) + 'A';
+		sem_array[16] = (i / 16) + 'A';
+		sem_array[17] = (i % 16) + 'A';
 		destroy_semaphore(&data->sem_meal_check[i], sem_array);
 		i++;
 	}
@@ -37,22 +40,26 @@ void	destroy_semaphores(t_data *data)
 
 int	init_semaphores(t_data *data)
 {
-	int	err;
-	int	i;
-	static char sem_array[30] = "/sem_meal_check_XX";
+	int			err;
+	int			i;
+	static char	sem_array[30] = "/sem_meal_check_XX";
 
 	err = 0;
-	err += create_semaphore("/sem_forks_count", data->nb_philo, &data->sem_forks_count);
+	err += create_semaphore("/sem_forks_count", data->nb_philo,
+			&data->sem_forks_count);
 	err += create_semaphore("/sem_forks_access", 1, &data->sem_forks_access);
 	err += create_semaphore("/sem_print", 1, &data->sem_print);
+	err += create_semaphore("/sem_main", 1, &data->sem_main);
+	err += create_semaphore("/sem_death", 0, &data->sem_death);
+	err += create_semaphore("/sem_full", 0, &data->sem_full);
 	i = 0;
 	data->sem_meal_check = malloc(sizeof(sem_t *) * data->nb_philo);
 	if (!data->sem_meal_check)
 		return (error_msg(MALLOC_FAIL));
 	while (i < data->nb_philo)
 	{
-		sem_array[17] = (i / 16) + 'A';
-		sem_array[18] = (i % 16) + 'A';
+		sem_array[16] = (i / 16) + 'A';
+		sem_array[17] = (i % 16) + 'A';
 		err += create_semaphore(sem_array, 1, &data->sem_meal_check[i]);
 		i++;
 	}
@@ -76,7 +83,6 @@ static void	destroy_semaphore(sem_t **sem, const char *name)
 {
 	if (*sem)
 	{
-		printf("destroying semaphore %s\n", name);
 		sem_close(*sem);
 		sem_unlink(name);
 		*sem = NULL;

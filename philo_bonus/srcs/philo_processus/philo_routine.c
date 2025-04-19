@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 11:22:03 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/17 10:59:59 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/19 10:35:02 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ void	philo_life(t_data *data)
 		next_action(data);
 	}
 	annonce_action(data, END, time);
-	exit(0);
+	sem_post(data->sem_full);
+	sem_wait(data->sem_meal_check[data->philo_id]);
+	ft_infinite_loop();
 }
 
 static void	next_action(t_data *data)

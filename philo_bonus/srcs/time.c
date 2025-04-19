@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 13:54:25 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/18 14:23:38 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/19 16:30:37 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ long	ft_get_time(void)
 	gettimeofday(&time, NULL);
 	return (time.tv_sec * 1000000 + time.tv_usec);
 }
-void	ft_infinite_loop()
+
+void	ft_infinite_loop(void)
 {
 	while (1)
 	{

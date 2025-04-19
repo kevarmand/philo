@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 09:20:14 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/17 15:10:37 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/19 16:36:08 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	*alone(t_data *data)
 int	alone_launch(t_data *data)
 {
 	pid_t	philo;
-	
+
 	philo = fork();
 	if (philo == -1)
 	{

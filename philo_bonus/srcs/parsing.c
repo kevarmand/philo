@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:18:12 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/03 14:26:45 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/19 16:44:51 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static int	custom_atoi(char *str, long *number);
  */
 int	parsing(t_data *data, int ac, char **av)
 {
+	int	err;
+
 	if (ac > 1 && flag(data, &ac, &av))
 		return (error_msg(WRONG_FLAG));
 	if (ac != 5 && ac != 6)
@@ -43,7 +45,10 @@ int	parsing(t_data *data, int ac, char **av)
 	}
 	else
 		data->nb_eat = -1;
-	return (error_msg(check_value(data)));
+	err = check_value(data);
+	if (err == 0)
+		return (0);
+	return (error_msg(err));
 }
 
 /***
@@ -95,7 +100,7 @@ static int	check_value(t_data *data)
 static int	flag(t_data *data, int *ac, char ***av)
 {
 	data->flag = 0;
-	if ((*av)[1][0] != '-' || (*av)[1][1] != '-')
+	if ((*av)[1][0] != '-')
 		return (0);
 	if (ft_strchr((*av)[1], 'a'))
 		data->flag = 3;

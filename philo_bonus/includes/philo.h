@@ -6,7 +6,7 @@
 /*   By: kearmand <kearmand@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 14:07:15 by kearmand          #+#    #+#             */
-/*   Updated: 2025/04/18 15:22:39 by kearmand         ###   ########.fr       */
+/*   Updated: 2025/04/19 16:30:07 by kearmand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include <sys/wait.h>
 # include <signal.h>
 # include <fcntl.h>
-
 
 # include "error.h"
 # include "color.h"
@@ -100,6 +99,7 @@ int		ft_strchr(char *str, char c);
  */
 void	*watch_full(void *data1);
 void	*watch_death(void *data1);
+void	terminate_all(pid_t *state, int nb);
 
 /***
  * Function: time
@@ -109,7 +109,8 @@ long	get_runtime(long start);
 void	wait_for_start(long start, t_data *data);
 void	precise_sleep(long start, long time);
 long	ft_get_time(void);
-void	ft_infinite_loop();
+void	ft_infinite_loop(void);
+
 /***
  * Function: philo_processus
  */
@@ -134,7 +135,6 @@ void	philo_life(t_data *data);
 void	philo_eat(t_data *data, long *now);
 void	philo_sleep(t_data *data, long *now);
 void	philo_think(t_data *data, long *now);
-
 
 /***
  * Function: philo_processus
